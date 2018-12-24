@@ -1,3 +1,4 @@
 # Chemistry
 Creativity Chemistry Project
-## element info.txt WIP
+element database.txt WIP
+element.java WIP (dependant on element database)
