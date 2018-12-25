@@ -19,7 +19,7 @@ public class Element
 		String name = "";
 		try
 		{
-			Scanner scanName = new Scanner(new File("\\src\\application\\name.txt"));
+			Scanner scanName = new Scanner(new File("src\\application\\name.txt"));
 			for(int i=0; i<atomicNum; i++)
 			{
 				name = scanName.next();
@@ -38,7 +38,7 @@ public class Element
 		String symbol = "";
 		try
 		{
-			Scanner scanSymbol = new Scanner(new File("\\src\\application\\symbol.txt"));
+			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
 			for(int i=0; i<atomicNum; i++)
 			{
 				symbol = scanSymbol.next();
@@ -219,7 +219,7 @@ public class Element
 
 		return -1;
 	}
-	
+
 	public int getBoilingPoint()
 	{
 		String boilingPt = "";
@@ -240,7 +240,7 @@ public class Element
 
 		return -1;
 	}
-	
+
 	public double getDensity()
 	{
 		String density = "";
@@ -261,7 +261,7 @@ public class Element
 
 		return -1;
 	}
-	
+
 	public int getAtomicRadius()
 	{
 		String atomicRadius = "";
@@ -282,7 +282,7 @@ public class Element
 
 		return -1;
 	}
-	
+
 	public String getElectronConfiguration()
 	{
 		String eConfig = "";
@@ -303,7 +303,7 @@ public class Element
 
 		return "";
 	}
-	
+
 	public String getPhase()
 	{
 		String phase = "";
@@ -324,7 +324,7 @@ public class Element
 
 		return "";
 	}
-	
+
 	public String getType()
 	{
 		String type = "";
@@ -345,14 +345,14 @@ public class Element
 
 		return "";
 	}
-	
+
 	public int getOxidationState()
 	{
 		String oxidState = "";
 		try
 		{
 			Scanner scanOxidState= new Scanner(new File("src\\application\\element database.txt"));
-			for(int i=0; i<(atomicNum-1) * 18 + 15 ;i++)
+			for(int i=0; i<atomicNum * 18;i++)
 			{
 				oxidState = scanOxidState.nextLine();
 			}

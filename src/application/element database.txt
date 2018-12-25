@@ -185,7 +185,7 @@ Na
 12
 1
 3
-Diatomic
+Not Diatomic
 496
 0.9
 371

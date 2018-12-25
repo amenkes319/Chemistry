@@ -6,94 +6,99 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" prefHeight="565.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <children>
-            <Label text="Hydrogen">
+            <Label fx:id="lblName" text="Hydrogen">
                <font>
                   <Font name="Times New Roman" size="32.0" />
                </font>
             </Label>
-            <Label text="Element Symbol: H">
+            <Label fx:id="lblSymbol" text="Element Symbol: H">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Atomic Number: 1">
+            <Label fx:id="lblAtomicNum" text="Atomic Number: 1">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Atomic Mass: 1.00794">
+            <Label fx:id="lblAtomicMass" text="Atomic Mass: 1.00794">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Number of Neutrons: 1">
+            <Label fx:id="lblNeutrons" text="Number of Neutrons: 1">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Group: 1">
+            <Label fx:id="lblGroup" text="Group: 1">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Period: 1">
+            <Label fx:id="lblPeriod" text="Period: 1">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Diatomic Molecule">
+            <Label fx:id="lblDiatomic" text="Diatomic Molecule">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Ionization Energy: 1312">
+            <Label fx:id="lblIE" text="Ionization Energy: 1312">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Electronegativity: 2.2">
+            <Label fx:id="lblEN" text="Electronegativity: 2.2">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Melting Point: 14K">
+            <Label fx:id="lblMeltingPt" text="Melting Point: 14K">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Boiling Point: 20K">
+            <Label fx:id="lblBoilingPt" text="Boiling Point: 20K">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Density: 0.000082g/cm3">
+            <Label fx:id="lblDensity" text="Density: 0.000082g/cm3">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Atomic Radius: 32pm">
+            <Label fx:id="lblRadius" text="Atomic Radius: 32pm">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Electron Configuration: 1">
+            <Label fx:id="lblEConfig" text="Electron Configuration: 1">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Phase at STP: Gas">
+            <Label fx:id="lblPhase" text="Phase at STP: Gas">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <Label text="Type: Nonmetal">
+            <Label fx:id="lblType" text="Type: Nonmetal">
+               <font>
+                  <Font name="Times New Roman" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOxidState" text="Oxidation State: +1">
                <font>
                   <Font name="Times New Roman" size="24.0" />
                </font>
