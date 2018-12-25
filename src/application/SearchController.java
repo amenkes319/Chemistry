@@ -45,7 +45,7 @@ public class SearchController
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showStage()
 	{
 		stgSearch.show();
@@ -93,7 +93,7 @@ public class SearchController
 		Scanner scanName = new Scanner(new File("src\\application\\name.txt"));
 		for(int i=1; scanName.hasNextLine(); i++)
 		{
-			if(getAtomName().equals(scanName.next()))
+			if(getAtomName().equalsIgnoreCase(scanName.next()))
 			{
 				scanName.close();
 				atomicNum =  i;
