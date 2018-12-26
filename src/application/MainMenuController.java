@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 
 public class MainMenuController
 {
@@ -21,6 +22,7 @@ public class MainMenuController
 	public MainMenuController()
 	{
 		stgMainMenu = new Stage();
+		stgMainMenu.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 		try
 		{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Main Menu.fxml"));

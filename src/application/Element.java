@@ -22,7 +22,7 @@ public class Element
 			Scanner scanName = new Scanner(new File("src\\application\\name.txt"));
 			for(int i=0; i<atomicNum; i++)
 			{
-				name = scanName.next();
+				name = scanName.nextLine();
 			}
 			scanName.close();
 		}
@@ -41,7 +41,7 @@ public class Element
 			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
 			for(int i=0; i<atomicNum; i++)
 			{
-				symbol = scanSymbol.next();
+				symbol = scanSymbol.nextLine();
 			}
 			scanSymbol.close();
 		}
@@ -189,7 +189,14 @@ public class Element
 				electroNeg = scanEN.nextLine();
 			}
 			scanEN.close();
-			return Double.parseDouble(electroNeg);
+			try
+			{
+				return Double.parseDouble(electroNeg);
+			}
+			catch(NumberFormatException e)
+			{
+				return 0;
+			}
 		}
 		catch(IOException e)
 		{
@@ -210,7 +217,14 @@ public class Element
 				meltingPt = scanMeltingPt.nextLine();
 			}
 			scanMeltingPt.close();
-			return Integer.parseInt(meltingPt);
+			try
+			{
+				return Integer.parseInt(meltingPt);
+			}
+			catch(NumberFormatException e)
+			{
+				return 0;
+			}
 		}
 		catch(IOException e)
 		{
@@ -231,7 +245,14 @@ public class Element
 				boilingPt = scanBoilingPt.nextLine();
 			}
 			scanBoilingPt.close();
-			return Integer.parseInt(boilingPt);
+			try
+			{
+				return Integer.parseInt(boilingPt);
+			}
+			catch(NumberFormatException e)
+			{
+				return 0;
+			}
 		}
 		catch(IOException e)
 		{
@@ -252,7 +273,14 @@ public class Element
 				density = scanDensity.nextLine();
 			}
 			scanDensity.close();
-			return Double.parseDouble(density);
+			try
+			{
+				return Double.parseDouble(density);
+			}
+			catch(NumberFormatException e)
+			{
+				return 0;
+			}
 		}
 		catch(IOException e)
 		{

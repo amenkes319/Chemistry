@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class SearchController
@@ -32,6 +33,7 @@ public class SearchController
 	public SearchController()
 	{
 		stgSearch = new Stage();
+		stgSearch.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 		try
 		{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
@@ -47,9 +49,11 @@ public class SearchController
 	}
 
 	public void showStage()
+
 	{
 		stgSearch.show();
 	}
+
 	public void loadBack()
 	{
 		MainMenuController ctrlMenu = new MainMenuController();
@@ -59,7 +63,7 @@ public class SearchController
 
 	public void loadElementInfo()
 	{
-		ElementInfoController ctrlElementInfo = new ElementInfoController(atomicNum);
+		ElementInfoController ctrlElementInfo = new ElementInfoController(atomicNum, stgSearch);
 		ctrlElementInfo.showStage();
 		stgSearch.close();
 	}
@@ -69,8 +73,15 @@ public class SearchController
 		try
 		{
 			atomicNum = Integer.parseInt(txtFldSearchNum.getText());
-			loadElementInfo();
-			stgSearch.close();
+
+			if(atomicNum < 1 || atomicNum > 57 && atomicNum < 72 || atomicNum > 89)
+				AlertBox.displayElementNotFound();
+			else
+			{
+				loadElementInfo();
+				stgSearch.close();
+			}
+
 		}
 		catch(NumberFormatException e)
 		{
@@ -97,8 +108,13 @@ public class SearchController
 			{
 				scanName.close();
 				atomicNum =  i;
-				loadElementInfo();
-				return;
+				if(atomicNum < 1 || atomicNum > 57 && atomicNum < 72 || atomicNum > 89)
+					AlertBox.displayElementNotFound();
+				else
+				{
+					loadElementInfo();
+					return;
+				}
 			}
 		}
 		scanName.close();
@@ -114,8 +130,14 @@ public class SearchController
 			{
 				scanSymbol.close();
 				atomicNum =  i;
-				loadElementInfo();
-				return;
+
+				if(atomicNum < 1 || atomicNum > 57 && atomicNum < 72 || atomicNum > 89)
+					AlertBox.displayElementNotFound();
+				else
+				{
+					loadElementInfo();
+					return;
+				}
 			}
 		}
 		scanSymbol.close();

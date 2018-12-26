@@ -19,7 +19,7 @@ public class AlertBox
 	{
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("ERROR");
-		alert.setHeaderText("ERROR... Element not found!");
+		alert.setHeaderText("ERROR... Number Not Entered!");
 		alert.setContentText("Please enter the atomic number");
 
 		alert.showAndWait();
