@@ -2,14 +2,12 @@ package application;
 
 import java.text.DecimalFormat;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ElementInfoController
@@ -136,7 +134,7 @@ public class ElementInfoController
 		stgElementInfo.close();
 		stgBack.show();
 	}
-	
+
 	public void loadMenu()
 	{
 		MainMenuController ctrlMenu = new MainMenuController();
