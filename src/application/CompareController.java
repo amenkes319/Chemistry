@@ -19,7 +19,7 @@ public class CompareController
 		try
 		{
 			stgCompare.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Periodic Table-Compare.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Compare Table.fxml"));
 
 			loader.setController(this);
 			stgCompare.setScene(new Scene(loader.load()));

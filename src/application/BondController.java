@@ -19,7 +19,7 @@ public class BondController
 		try
 		{
 			stgBond.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Periodic Table-Bond.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Bond Table.fxml"));
 
 			loader.setController(this);
 			stgBond.setScene(new Scene(loader.load()));
