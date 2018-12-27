@@ -1,4 +1,4 @@
-# Chemistry
-# Creativity Chemistry Project
+
+# Chemistry Project
 # element database.txt WIP
-# element.java WIP (dependant on element database)
+# Bonging WIP
