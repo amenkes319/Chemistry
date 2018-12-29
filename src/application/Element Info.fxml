@@ -6,105 +6,125 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <VBox alignment="CENTER" prefHeight="565.0" prefWidth="500.0" BorderPane.alignment="CENTER">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      <HBox alignment="CENTER">
          <children>
-            <Label fx:id="lblName" text="Element Name">
-               <font>
-                  <Font name="Times New Roman" size="32.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblSymbol" text="Element Symbol">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblAtomicNum" text="Atomic Number">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblAtomicMass" text="Atomic Mass">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblNeutrons" text="Number of Neutrons">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblGroup" text="Group">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblPeriod" text="Period">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblDiatomic" text="Diatomic Molecule">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblIE" text="Ionization Energy">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblEN" text="Electronegativity">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblMeltingPt" text="Melting Point">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblBoilingPt" text="Boiling Point">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblDensity" text="Density">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblRadius" text="Atomic Radius">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblEConfig" text="Electron Configuration">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblPhase" text="Phase at STP">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblType" text="Type">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblOxidState" text="Oxidation State">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER_RIGHT" prefHeight="565.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <Label fx:id="lblName" text="Element Name">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblSymbol" text="Element Symbol">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAtomicNum" text="Atomic Number">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblAtomicMass" text="Atomic Mass">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblNeutrons" text="Number of Neutrons">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblGroup" text="Group">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblPeriod" text="Period">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDiatomic" text="Diatomic Molecule">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblIE" text="Ionization Energy">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="565.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <Label fx:id="lblEN" text="Electronegativity">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblMeltingPt" text="Melting Point">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblBoilingPt" text="Boiling Point">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDensity" text="Density">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblRadius" text="Atomic Radius">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblEConfig" text="Electron Configuration">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblPhase" text="Phase at STP">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblType" text="Type">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblOxidState" text="Oxidation State">
+                     <font>
+                        <Font name="Times New Roman" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </center>
    <top>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">

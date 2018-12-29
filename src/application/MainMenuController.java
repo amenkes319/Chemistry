@@ -65,7 +65,7 @@ public class MainMenuController
 
 	public void loadBond()
 	{
-		BondController ctrlBond = new BondController();
+		BondTableController ctrlBond = new BondTableController();
 		ctrlBond.showStage();
 		stgMainMenu.close();
 	}

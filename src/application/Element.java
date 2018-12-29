@@ -6,12 +6,10 @@ import java.io.*;
 public class Element
 {
 	int atomicNum;
-	final int NUM_OF_ELEMENTS;
 
 	public Element(int a)
 	{
 		atomicNum = a;
-		NUM_OF_ELEMENTS = 89;
 	}
 
 	public String getName()
@@ -359,7 +357,7 @@ public class Element
 		try
 		{
 			Scanner scanType= new Scanner(new File("src\\application\\element database.txt"));
-			for(int i=0; i<(atomicNum-1) * 18 + 17 ;i++)
+			for(int i=0; i<(atomicNum-1) * 18 + 17; i++)
 			{
 				type = scanType.nextLine();
 			}
@@ -393,5 +391,13 @@ public class Element
 		}
 
 		return -1;
+	}
+
+	public boolean isMetallic()
+	{
+		if(getType().equals("Nonmetal"))
+			return false;
+
+		return true;
 	}
 }
