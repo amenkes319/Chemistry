@@ -15,6 +15,7 @@ public class ElementInfoController
 	Stage stgElementInfo;
 	Stage stgBack;
 	int atomicNum;
+
 	@FXML
 	private Button btnMenu;
 
@@ -79,9 +80,7 @@ public class ElementInfoController
 	public void initialize()
 	{
 		Element element = new Element(atomicNum);
-		DecimalFormat df = new DecimalFormat("#");
-
-		df.setMaximumFractionDigits(6);
+		DecimalFormat df = new DecimalFormat("#.######");
 
 		lblName.setText(element.getName());
 		lblSymbol.setText("Element Symbol: " + element.getSymbol());

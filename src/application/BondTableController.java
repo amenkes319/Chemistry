@@ -15,12 +15,16 @@ public class BondTableController
 {
 	Stage stgBondTable;
 	int elementCounter;
+	int atomicNum1;
+	int atomicNum2;
 	@FXML
 	private Button btnBack;
 
 	public BondTableController()
 	{
 		elementCounter = 0;
+		atomicNum1 = 1;
+		atomicNum2 = 1;
 		stgBondTable = new Stage();
 		try
 		{
@@ -51,8 +55,6 @@ public class BondTableController
 	public void isPressed(ActionEvent event)
 	{
 		String symbol = (((Button) event.getSource()).getText());
-		int atomicNum1 = 1;
-		int atomicNum2 = 1;
 		try
 		{
 			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
@@ -69,6 +71,13 @@ public class BondTableController
 				{
 					atomicNum2++;
 				}
+			}
+			if(atomicNum1 == atomicNum2)
+			{
+				elementCounter = 1;
+				atomicNum2 = 1;
+				scanSymbol.close();
+				return;
 			}
 			scanSymbol.close();
 		}

@@ -1,7 +1,9 @@
 package application;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -10,6 +12,14 @@ public class BondController
 	Stage stgBond;
 	Element element1;
 	Element element2;
+	@FXML
+	private Label lblName;
+	@FXML
+	private Label lblType;
+	@FXML
+	private Label lblPolarity;
+	@FXML
+	private Label lblMoleculeShape;
 
 	public BondController(int e1, int e2)
 	{
@@ -29,6 +39,14 @@ public class BondController
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public void initialize()
+	{
+		lblName.setText(getBondName());
+		lblType.setText(getBondType());
+		lblPolarity.setText(getBondPolarity());
+		lblMoleculeShape.setText(getMoleculeShape());
 	}
 
 	public void showStage()
@@ -52,7 +70,7 @@ public class BondController
 
 	private String getBondName()
 	{
-		String name = null;
+		String name = "Name";
 
 
 		return name;
@@ -61,10 +79,13 @@ public class BondController
 	private String getBondType()
 	{
 		String bondType = null;
+
 		if(element1.isMetallic() && !element2.isMetallic() || !element1.isMetallic() && element2.isMetallic())
 			bondType = "Ionic";
 		else if(!(element1.isMetallic() || element2.isMetallic()))
 			bondType = "Covalent";
+		else if(element1.isMetallic() && element2.isMetallic())
+			bondType = "Metallic";
 
 		return bondType;
 	}
@@ -72,11 +93,21 @@ public class BondController
 	private String getBondPolarity()
 	{
 		String polarity = null;
-		if(element1.getElectronegativity() == element2.getElectronegativity())
-			polarity = "Nonolar";
-		else
+		if(!getBondType().equals("Covalent"))
+			polarity = null;
+		else if(element1.getElectronegativity() == element2.getElectronegativity())
+			polarity = "Nonpolar";
+		else if(element1.getElectronegativity() != element2.getElectronegativity())
 			polarity = "Polar";
 
 		return polarity;
+	}
+
+	private String getMoleculeShape()
+	{
+		String moleculeShape = "Shape";
+
+
+		return moleculeShape;
 	}
 }
