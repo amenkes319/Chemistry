@@ -50,6 +50,14 @@ public class BondController
 		stgBond.close();
 	}
 
+	private String getBondName()
+	{
+		String name = null;
+
+
+		return name;
+	}
+
 	private String getBondType()
 	{
 		String bondType = null;
@@ -61,7 +69,7 @@ public class BondController
 		return bondType;
 	}
 
-	private String getMoleculePolarity()
+	private String getBondPolarity()
 	{
 		String polarity = null;
 		if(element1.getElectronegativity() == element2.getElectronegativity())
