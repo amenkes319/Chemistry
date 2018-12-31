@@ -102,7 +102,7 @@
                               <Font name="Times New Roman" size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblEConfig" text="Electron Configuration">
+                        <Label fx:id="lblDiatomic" text="Diatomic Molecule">
                            <font>
                               <Font name="Times New Roman" size="24.0" />
                            </font>
@@ -131,7 +131,7 @@
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblDiatomic" text="Diatomic Molecule">
+                  <Label fx:id="lblEConfig" text="Electron Configuration">
                      <font>
                         <Font name="Times New Roman" size="24.0" />
                      </font>
