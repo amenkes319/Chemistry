@@ -86,7 +86,7 @@ public class ElementInfoController
 		lblSymbol.setText("Element Symbol: " + element.getSymbol());
 		lblAtomicNum.setText("Atomic Number: " + atomicNum);
 		lblAtomicMass.setText("Atomic Mass: " + element.getAtomicMass());
-		lblNeutrons.setText("Number of Neutrons: " + element.getNumOfNeutrons());
+		lblNeutrons.setText("Number of Neutrons: " + element.getNeutrons());
 		lblGroup.setText("Group: " + element.getGroup());
 		lblPeriod.setText("Period: " + element.getPeriod());
 		lblDiatomic.setText(element.getDiatomic());
@@ -113,14 +113,10 @@ public class ElementInfoController
 			lblDensity.setText("Density: " + df.format(element.getDensity()) + "g/cm3");
 
 		lblRadius.setText("Atomic Radius: " + element.getAtomicRadius() + "pm");
-		lblEConfig.setText("Electron Configuration: " + element.getElectronConfiguration());
+		lblEConfig.setText("Electron Configuration: " + element.getEConfig());
 		lblPhase.setText("Phase at STP: " + element.getPhase());
 		lblType.setText("Type: " + element.getType());
-
-		if(element.getOxidationState() > 0)
-			lblOxidState.setText("Oxidation State: +" + element.getOxidationState());
-		else
-			lblOxidState.setText("Oxidation State: " + element.getOxidationState());
+		lblOxidState.setText("Oxidation State(s): " + element.getOxidationState());
 	}
 
 	public void showStage()

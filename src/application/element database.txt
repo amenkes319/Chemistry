@@ -15,7 +15,7 @@ Diatomic
 1
 Gas
 Nonmetal
-+1
++1, -1
 Helium
 He
 2
@@ -105,7 +105,7 @@ N/A
 2-4
 Solid
 Nonmetal
--4
+-4, +2, +4
 Nitrogen
 N
 7
@@ -123,7 +123,7 @@ Diatomic
 2-5
 Gas
 Nonmetal
--3
+-3, -2, -1, +1, +2, +3, +4, +5
 Oxygen
 O
 8
@@ -249,7 +249,7 @@ Not Diatomic
 2-8-4
 Solid
 Metalloid
--4
+-4, +2, +4
 Phosphorus
 P
 15
@@ -267,7 +267,7 @@ Not Diatomic
 2-8-5
 Solid
 Nonmetal
--3
+-3, +3, +5
 Sulfur
 S
 16
@@ -285,7 +285,7 @@ Not Diatomic
 2-8-6
 Solid
 Nonmetal
--2
+-2, +4, +6
 Chlorine
 Cl
 17
@@ -303,7 +303,7 @@ Diatomic
 2-8-7
 Gas
 Nonmetal
--1
+-1, +1, +5, +7
 Argon
 Ar
 18
@@ -354,7 +354,7 @@ Not Diatomic
 1757
 1.54
 174
-2-2
+2-8-8-2
 Solid
 Metal
 +2
@@ -372,10 +372,10 @@ Not Diatomic
 3109
 2.99
 159
-2-2
+2-8-9-2
 Solid
 Metal
-+2
++3
 Titanium
 Ti
 22
@@ -390,10 +390,10 @@ Not Diatomic
 3560
 4.506
 148
-2-2
+2-8-10-2
 Solid
 Metal
-+2
++2, +3, +4
 Vanadium
 V
 23
@@ -408,10 +408,10 @@ Not Diatomic
 3680
 6.0
 144
-2-2
+2-8-11-2
 Solid
 Metal
-+2
++2, +3, +4, +5
 Chromium
 Cr
 24
@@ -426,10 +426,10 @@ Not Diatomic
 2944
 7.15
 130
-2-2
+2-8-13-1
 Solid
 Metal
-+2
++2, +3, +6
 Manganese
 Mn
 25
@@ -444,10 +444,10 @@ Not Diatomic
 2334
 7.3
 129
-2-2
+2-8-13-2
 Solid
 Metal
-+2
++2, +3, +4, +7
 Iron
 Fe
 26
@@ -462,10 +462,10 @@ Not Diatomic
 3134
 7.87
 124
-2-2
+2-8-14-2
 Solid
 Metal
-+2
++2, +3
 Cobalt
 Co
 27
@@ -480,10 +480,10 @@ Not Diatomic
 3200
 8.86
 118
-2-2
+2-8-15-2
 Solid
 Metal
-+2
++2, +3
 Nickel
 Ni
 28
@@ -498,10 +498,10 @@ Not Diatomic
 3186
 8.90
 117
-2-2
+2-8-16-2
 Solid
 Metal
-+2
++2, +3
 Copper
 Cu
 29
@@ -516,10 +516,10 @@ Not Diatomic
 2835
 8.96
 122
-2-2
+2-8-18-1
 Solid
 Metal
-+2
++1, +2
 Zinc
 Zn
 30
@@ -534,7 +534,7 @@ Not Diatomic
 1180
 7.134
 120
-2-2
+2-8-18-2
 Solid
 Metal
 +2
@@ -552,10 +552,10 @@ Not Diatomic
 2477
 5.91
 123
-2-2
+2-8-18-3
 Solid
 Metal
-+2
++3
 Germanium
 Ge
 32
@@ -570,10 +570,10 @@ Not Diatomic
 3106
 7.3234
 120
-2-2
+2-8-18-4
 Solid
-Metal
-+2
+Metalloid
++2, +4
 Arsenic
 As
 33
@@ -588,10 +588,10 @@ Not Diatomic
 N/A
 5.75
 120
-2-2
+2-8-18-5
 Solid
-Metal
-+2
+Metalloid
+-3, +3, +5
 Selenium
 Se
 34
@@ -606,10 +606,10 @@ Not Diatomic
 958
 4.809
 118
-2-2
+2-8-18-6
 Solid
-Metal
-+2
+Nonmetal
+-2, +4, +6
 Bromine
 Br
 35
@@ -624,10 +624,10 @@ Diatomic
 332
 3.1028
 117
-2-2
-Solid
-Metal
-+2
+2-8-18-7
+Liquid
+Nonmetal
+-1, +1, +5
 Krypton
 Kr
 36
@@ -642,10 +642,10 @@ N/A
 120
 .003425
 116
-2-2
-Solid
-Metal
-+2
+2-8-18-8
+Gas
+Nonmetal
+0
 Rubidium
 Rb
 37
@@ -660,10 +660,10 @@ Not Diatomic
 961
 1.53
 215
-2-2
+2-8-19-8-1
 Solid
-Metal
-+2
+Nonmetal
++1
 Strontium
 Sr
 38
@@ -678,7 +678,7 @@ Not Diatomic
 1655
 2.64
 190
-2-2
+2-8-18-8-2
 Solid
 Metal
 +2
@@ -696,10 +696,10 @@ Not Diatomic
 3618
 4.47
 176
-2-2
+2-8-18-9-2
 Solid
 Metal
-+2
++3
 Zirconium
 Zr
 40
@@ -714,10 +714,10 @@ Not Diatomic
 4682
 6.52
 164
-2-2
+2-8-18-10-2
 Solid
 Metal
-+2
++4
 Niobium
 Nb
 41
@@ -732,10 +732,10 @@ Not Diatomic
 5017
 8.57
 156
-2-2
+2-8-18-12-1
 Solid
 Metal
-+2
++3, +5
 Molybdenum
 Mo
 42
@@ -750,10 +750,10 @@ Not Diatomic
 4912
 10.2
 146
-2-2
+2-8-18-13-1
 Solid
 Metal
-+2
++6
 Technetium
 Tc
 43
@@ -768,10 +768,10 @@ Not Diatomic
 4538
 11
 138
-2-2
+2-8-18-13-2
 Solid
 Metal
-+2
++4, +6, +7
 Ruthentium
 Ru
 44
@@ -786,10 +786,10 @@ Not Diatomic
 4423
 12.1
 136
-2-2
+2-8-18-15-1
 Solid
 Metal
-+2
++3
 Rhodium
 Rh
 45
@@ -804,10 +804,10 @@ Not Diatomic
 3968
 12.4
 134
-2-2
+2-8-18-16-1
 Solid
 Metal
-+2
++3
 Palladium
 Pd
 46
@@ -822,10 +822,10 @@ Not Diatomic
 3236
 12.0
 130
-2-2
+2-8-18-18
 Solid
 Metal
-+2
++2, +4
 Silver
 Ag
 47
@@ -840,10 +840,10 @@ Not Diatomic
 2435
 10.5
 136
-2-2
+2-8-18-18-1
 Solid
 Metal
-+2
++1
 Cadmium
 Cd
 48
@@ -858,7 +858,7 @@ Not Diatomic
 1040
 8.69
 140
-2-2
+2-8-18-18-2
 Solid
 Metal
 +2
@@ -876,10 +876,10 @@ Not Diatomic
 2345
 7.31
 142
-2-2
+2-8-18-18-3
 Solid
 Metal
-+2
++3
 Tin
 Sn
 50
@@ -894,10 +894,10 @@ Not Diatomic
 2875
 7.287
 140
-2-2
+2-8-18-18-4
 Solid
 Metal
-+2
++2, +4
 Antimony
 Sb
 51
@@ -912,10 +912,10 @@ Not Diatomic
 1860
 6.68
 140
-2-2
+2-8-18-18-5
 Solid
-Metal
-+2
+Metalloid
+-3, +3, +5
 Tellurium
 Te
 52
@@ -930,10 +930,10 @@ Not Diatomic
 1261
 6.232
 137
-2-2
+2-8-18-18-6
 Solid
-Metal
-+2
+Metalloid
+-2, +4, +6
 Iodine
 I
 53
@@ -948,10 +948,10 @@ Diatomic
 457
 4.933
 136
-2-2
+2-8-18-18-7
 Solid
-Metal
-+2
+Nonmetal
+-1, +1, +5, +7
 Xenon
 Xe
 54
@@ -966,10 +966,10 @@ Not Diatomic
 165
 0.005366
 136
-2-2
-Solid
-Metal
-+2
+2-8-18-18-8
+Gas
+Nonmetal
+0
 Cesium
 Cs
 55
@@ -984,10 +984,10 @@ Not Diatomic
 944
 1.873
 238
-2-2
+2-8-18-18-8-1
 Solid
 Metal
-+2
++1
 Barium
 Ba
 56
@@ -1002,7 +1002,7 @@ Not Diatomic
 2170
 3.62
 206
-2-2
+2-8-18-18-8-2
 Solid
 Metal
 +2
@@ -1020,10 +1020,10 @@ Not Diatomic
 3737
 6.15
 194
-2-2
+2-8-18-18-9-2
 Solid
 Metal
-+2
++3
 
 
 
@@ -1290,10 +1290,10 @@ Not Diatomic
 4876
 13.3
 164
-2-2
+2-8-18-32-10-2
 Solid
 Metal
-+2
++4
 Tantalum
 Ta
 73
@@ -1308,10 +1308,10 @@ Not Diatomic
 5731
 16.4
 158
-2-2
+2-8-18-32-11-2
 Solid
 Metal
-+2
++5
 Tungsten
 W
 74
@@ -1326,10 +1326,10 @@ Not Diatomic
 5828
 19.3
 150
-2-2
+2-8-18-32-12-2
 Solid
 Metal
-+2
++6
 Rhenium
 Re
 75
@@ -1344,10 +1344,10 @@ Not Diatomic
 5869
 20.8
 141
-2-2
+2-8-18-32-13-2
 Solid
 Metal
-+2
++4, +6, +7
 Osmium
 Os
 76
@@ -1362,10 +1362,10 @@ Not Diatomic
 5285
 22.587
 136
-2-2
+2-8-18-32-14-2
 Solid
 Metal
-+2
++3, +4
 Iridium
 Ir
 77
@@ -1380,10 +1380,10 @@ Not Diatomic
 4701
 22.562
 132
-2-2
+2-8-18-32-15-2
 Solid
 Metal
-+2
++3, +4
 Platinum
 Pt
 78
@@ -1398,10 +1398,10 @@ Not Diatomic
 4098
 21.5
 1300
-2-2
+2-8-18-32-17-1
 Solid
 Metal
-+2
++2, +4
 Gold
 Au
 79
@@ -1416,10 +1416,10 @@ Not Diatomic
 3129
 19.3
 130
-2-2
+2-8-18-32-18-1
 Solid
 Metal
-+2
++1, +3
 Mercury
 Hg
 80
@@ -1434,10 +1434,10 @@ Not Diatomic
 630
 13.5336
 132
-2-2
-Solid
+2-8-18-32-18-2
+Liquid
 Metal
-+2
++1, +2
 Thallium
 Tl
 81
@@ -1452,10 +1452,10 @@ Not Diatomic
 1746
 11.8
 144
-2-2
+2-8-18-32-18-3
 Solid
 Metal
-+2
++1, +3
 Lead
 Pb
 82
@@ -1470,10 +1470,10 @@ Not Diatomic
 2022
 11.3
 145
-2-2
+2-8-18-32-18-4
 Solid
 Metal
-+2
++2, +4
 Bismuth
 Bi
 83
@@ -1488,10 +1488,10 @@ Not Diatomic
 1837
 9.79
 150
-2-2
+2-8-18-32-18-5
 Solid
 Metal
-+2
++3, +5
 Polonium
 Po
 84
@@ -1506,10 +1506,10 @@ Not Diatomic
 1235
 9.20
 142
-2-2
+2-8-18-32-18-6
 Solid
-Metal
-+2
+Metalloid
++2, +4
 Astatine
 At
 85
@@ -1524,10 +1524,10 @@ N/A
 N/A
 N/A
 148
-2-2
+2-8-18-32-18-7
 Solid
-Metal
-+2
+Metalloid
+-1, +1, +5, +7
 Radon
 Rn
 86
@@ -1542,10 +1542,10 @@ Not Diatomic
 211
 0.009074
 146
-2-2
-Solid
-Metal
-+2
+2-8-18-32-18-8
+Gas
+Nonmetal
+0
 Francium
 Fr
 87
@@ -1560,10 +1560,10 @@ Not Diatomic
 N/A
 N/A
 242
-2-2
+2-8-18-32-18-8-1
 Solid
 Metal
-+2
++1
 Radium
 Ra
 88
@@ -1578,7 +1578,7 @@ Not Diatomic
 N/A
 5.0
 211
-2-2
+2-8-18-32-18-8-2
 Solid
 Metal
 +2
@@ -1596,7 +1596,7 @@ Not Diatomic
 3471
 10.0
 201
-2-2
+2-8-18-32-18-9-2
 Solid
 Metal
-+2
++3
