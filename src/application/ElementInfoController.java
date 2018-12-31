@@ -90,7 +90,12 @@ public class ElementInfoController
 		lblGroup.setText("Group: " + element.getGroup());
 		lblPeriod.setText("Period: " + element.getPeriod());
 		lblDiatomic.setText(element.getDiatomic());
-		lblIE.setText("Ionization Energy: " + element.getIonizationEnergy());
+
+		if(element.getElectronegativity() == 0)
+			lblEN.setText("Ionization Energy: N/A");
+		else
+			lblIE.setText("Ionization Energy: " + element.getIonizationEnergy());
+
 
 		if(element.getElectronegativity() == 0)
 			lblEN.setText("Electronegativity: N/A");
