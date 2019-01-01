@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -23,6 +24,8 @@ public class BondTableController
 	Element element2;
 	String style1;
 	String style2;
+	String first;
+	String second;
 
 	@FXML
 	private Button btnBack;
@@ -68,14 +71,34 @@ public class BondTableController
 	{
 		String symbol = (((ToggleButton)event.getSource()).getText());
 
-		((ToggleButton)event.getSource()).setStyle("-fx-background-color: white");
-
 		try
 		{
 			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
 
+			if(((ToggleButton)event.getSource()).isSelected() && ((ToggleButton)event.getSource()).getText()==first && elementCounter>0)
+			{
+				((ToggleButton)event.getSource()).setStyle(style1);
+				((ToggleButton)event.getSource()).setSelected(false);
+				style1 = "";
+				scanSymbol.close();
+				elementCounter--;
+
+				return;
+			}
+			else if(((ToggleButton)event.getSource()).isSelected() && ((ToggleButton)event.getSource()).getText()==second && elementCounter>0)
+			{
+				((ToggleButton)event.getSource()).setStyle(style2);
+				((ToggleButton)event.getSource()).setSelected(false);
+				style2 = "";
+				elementCounter--;
+				scanSymbol.close();
+
+				return;
+			}
+
 			if(elementCounter == 0)
 			{
+				first = ((ToggleButton)event.getSource()).getText();
 				style1 = ((ToggleButton)event.getSource()).getStyle();
 				while(!scanSymbol.nextLine().equals(symbol))
 				{
@@ -84,6 +107,7 @@ public class BondTableController
 			}
 			else if(elementCounter == 1)
 			{
+				second = ((ToggleButton)event.getSource()).getText();
 				style2 = ((ToggleButton)event.getSource()).getStyle();
 				while(!scanSymbol.nextLine().equals(symbol))
 				{
@@ -91,13 +115,8 @@ public class BondTableController
 				}
 			}
 
-			if(element1.getAtomicNum() == element2.getAtomicNum())
-			{
-				elementCounter = 1;
-				element2 = new Element(1);
-				scanSymbol.close();
-				return;
-			}
+			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black");
+			((ToggleButton)event.getSource()).setStyle("-fx-background-color: white");
 			scanSymbol.close();
 		}
 		catch(Exception e)
