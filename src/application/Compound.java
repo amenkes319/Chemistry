@@ -2,7 +2,9 @@ package application;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
 import uk.ac.cam.ch.wwmm.opsin.NameToStructure;
 
 public class Compound
@@ -25,15 +27,7 @@ public class Compound
 		element2 = two;
 		quantity2 = y;
 
-		if(quantity1 == 1 && quantity2 ==1)
-			formula = element1.getSymbol() + element2.getSymbol();
-		else if(quantity1 == 1)
-			formula = element1.getSymbol() + element2.getSymbol() + quantity2;
-		else if(quantity2 == 1)
-			formula = element1.getSymbol() + quantity1 + element2.getSymbol();
-		else
-			formula = element1.getSymbol() + quantity1 + element2.getSymbol() + quantity2;
-
+		findFormula();
 		name = searchIUPACName(formula);
 
 		NameToStructure nts = NameToStructure.getInstance();
@@ -77,6 +71,69 @@ public class Compound
 
         return names;
     }
+
+
+	public static ArrayList<String> searchCompounds(Element element1, Element element2)
+	{
+		ArrayList<String> temp = new ArrayList<String>();
+
+		org.jsoup.nodes.Document doc1 = null, doc2 = null;
+		try {
+			doc1 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element1.getSymbol() + " " + element2.getSymbol() ).data("sel", "f").post();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			doc2 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element2.getSymbol() + " " + element1.getSymbol() ).data("sel", "f").post();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	    org.jsoup.select.Elements elements1 = doc1.getElementById("note").getElementsByClass("cmline");
+	    org.jsoup.select.Elements elements2 = doc2.getElementById("note").getElementsByClass("cmline");
+
+	    for(org.jsoup.nodes.Element element : elements1)
+	    {
+	    	temp.add(element.getElementsByClass("cmformula").text());
+	    }
+
+	    for(org.jsoup.nodes.Element element : elements2)
+	    {
+	    	temp.add(element.getElementsByClass("cmformula").text());
+	    }
+
+	    ArrayList<String> results = new ArrayList<String>();
+
+	    for(int i = 0; i<temp.size(); i++)
+	    {
+	    	if(element1.getSymbol().length() + element2.getSymbol().length() == temp.get(i).replaceAll("\\d", "").length() && temp.get(i).contains(element1.getSymbol()) && temp.get(i).contains(element2.getSymbol()) && !results.contains(temp.get(i)))
+	    	{
+	    		results.add(temp.get(i));
+	    	}
+	    }
+
+	    if (results.isEmpty())
+	    {
+	        results.add("No Results!");
+	    }
+
+	    return results;
+	}
+
+	public void findFormula()
+	{
+
+	}
+
+	public Element getElement1()
+	{
+		return element1;
+	}
+
+	public Element getElement2()
+	{
+		return element2;
+	}
 
 	public String getSmiles()
 	{
@@ -131,12 +188,73 @@ public class Compound
 		return bondPolarity;
 	}
 
+	public void setQuantity1(int num)
+	{
+		quantity1 = num;
+	}
+
+	public void setQuantity2(int num)
+	{
+		quantity2 = num;
+	}
+
+	public void setQuantities(int num1, int num2)
+	{
+		quantity1 = num1;
+		quantity2 = num2;
+	}
+
 	public String getMoleculeShape()
 	{
 		String moleculeShape = "Shape";
-
-
 		return moleculeShape;
 	}
 
+//	public void order()
+//	{
+//		ArrayList<Element> elements = new ArrayList<Element>(Arrays.asList(element1,element2));
+//		ArrayList<String> symbols = new ArrayList<String>(Arrays.asList(element1.getSymbol(), element2.getSymbol()));
+//
+//		if(bondType=="Covalent")
+//		{
+//			int order1 = 0;
+//			int order2 = 0;
+//			int[] orders = new int[]{order1, order2};
+//
+//			Collections.sort(symbols);
+//
+//			if(symbols.contains("C"))
+//			{
+//				for(int i = 0; i < 1; i++)
+//				{
+//					if(symbols.get(i).equals("C"))
+//						orders[i]=0;
+//					else if(symbols.get(i).equals("H"))
+//						orders[i]=1;
+//					else
+//						orders[i]=2;
+//				}
+//			}
+//			else
+//			{
+//				for(int i = 0; i < 1; i++)
+//				{
+//					if(symbols.get(i).equals("H"))
+//						orders[i]=0;
+//					else
+//						orders[i]=1;
+//				}
+//			}
+//			if(orders[1]<orders[0])
+//				Collections.swap(elements, 0, 1);
+//		}
+//		else if(bondType=="Ionic")
+//		{
+//			if(element1.getElectronegativity()>element2.getElectronegativity())
+//				Collections.swap(elements, 0, 1);
+//		}
+//
+//		element1 = elements.get(0);
+//		element2 = elements.get(1);
+//	}
 }

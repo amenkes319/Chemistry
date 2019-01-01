@@ -8,9 +8,6 @@ public class Main extends Application
 {
     public static void main(String[] args)
     {
-    	Compound test = new Compound(new Element(6),1,new Element(8),2);
-    	System.out.println(test.getSmiles());
-
     	launch(args);
     }
 
