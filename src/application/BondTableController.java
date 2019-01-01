@@ -27,7 +27,7 @@ public class BondTableController
 	@FXML
 	private Button btnBack;
 	@FXML
-	private Label select;
+	private Label lblSelect;
 	@FXML
 	private ChoiceBox<String> choice;
 
@@ -119,7 +119,7 @@ public class BondTableController
 
 	public void displayCompounds(ArrayList<String> compounds)
 	{
-		select.setText("Select a Compound");
+		lblSelect.setText("Select a Compound");
 		choice.setVisible(true);
 		for(int i = 0; i < compounds.size(); i++)
 		{

@@ -72,7 +72,6 @@ public class Compound
         return names;
     }
 
-
 	public static ArrayList<String> searchCompounds(Element element1, Element element2)
 	{
 		ArrayList<String> temp = new ArrayList<String>();
@@ -106,7 +105,8 @@ public class Compound
 
 	    for(int i = 0; i<temp.size(); i++)
 	    {
-	    	if(element1.getSymbol().length() + element2.getSymbol().length() == temp.get(i).replaceAll("\\d", "").length() && temp.get(i).contains(element1.getSymbol()) && temp.get(i).contains(element2.getSymbol()) && !results.contains(temp.get(i)))
+	    	if(element1.getSymbol().length() + element2.getSymbol().length() == temp.get(i).replaceAll("\\d", "").length() && temp.get(i).contains(element1.getSymbol())
+	    			&& temp.get(i).contains(element2.getSymbol()) && !results.contains(temp.get(i)))
 	    	{
 	    		results.add(temp.get(i));
 	    	}
