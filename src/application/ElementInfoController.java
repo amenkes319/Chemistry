@@ -115,7 +115,7 @@ public class ElementInfoController
 		if(element.getDensity() == 0)
 			lblDensity.setText("Density: N/A");
 		else
-			lblDensity.setText("Density: " + df.format(element.getDensity()) + "g/cm3");
+			lblDensity.setText("Density: " + df.format(element.getDensity()) + "g/cm");
 
 		lblRadius.setText("Atomic Radius: " + element.getAtomicRadius() + "pm");
 		lblEConfig.setText("Electron Configuration: " + element.getEConfig());

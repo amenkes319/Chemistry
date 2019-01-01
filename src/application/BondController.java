@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 public class BondController
 {
 	Stage stgBond;
-	Element element1;
-	Element element2;
+	Compound comp;
+
 	@FXML
 	private Label lblName;
 	@FXML
@@ -21,11 +21,10 @@ public class BondController
 	@FXML
 	private Label lblMoleculeShape;
 
-	public BondController(int e1, int e2)
+	public BondController(Compound x)
 	{
 		stgBond = new Stage();
-		element1 = new Element(e1);
-		element2 = new Element(e2);
+		comp = x;
 		try
 		{
 			stgBond.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
@@ -43,10 +42,10 @@ public class BondController
 
 	public void initialize()
 	{
-		lblName.setText(getBondName());
-		lblType.setText(getBondType());
-		lblPolarity.setText(getBondPolarity());
-		lblMoleculeShape.setText(getMoleculeShape());
+		lblName.setText(comp.getName());
+		lblType.setText(comp.getBondType());
+		lblPolarity.setText(comp.getBondPolarity());
+		lblMoleculeShape.setText(comp.getMoleculeShape());
 	}
 
 	public void showStage()
@@ -68,46 +67,4 @@ public class BondController
 		stgBond.close();
 	}
 
-	private String getBondName()
-	{
-		String name = "Name";
-
-
-		return name;
-	}
-
-	private String getBondType()
-	{
-		String bondType = null;
-
-		if(element1.isMetallic() && !element2.isMetallic() || !element1.isMetallic() && element2.isMetallic())
-			bondType = "Ionic";
-		else if(!(element1.isMetallic() || element2.isMetallic()))
-			bondType = "Covalent";
-		else if(element1.isMetallic() && element2.isMetallic())
-			bondType = "Metallic";
-
-		return bondType;
-	}
-
-	private String getBondPolarity()
-	{
-		String polarity = null;
-		if(!getBondType().equals("Covalent"))
-			polarity = null;
-		else if(element1.getElectronegativity() == element2.getElectronegativity())
-			polarity = "Nonpolar";
-		else if(element1.getElectronegativity() != element2.getElectronegativity())
-			polarity = "Polar";
-
-		return polarity;
-	}
-
-	private String getMoleculeShape()
-	{
-		String moleculeShape = "Shape";
-
-
-		return moleculeShape;
-	}
 }

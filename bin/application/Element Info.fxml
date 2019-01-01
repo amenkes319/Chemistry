@@ -129,11 +129,20 @@
                <children>
                   <VBox alignment="TOP_CENTER">
                      <children>
-                        <Label fx:id="lblDensity" text="Density">
-                           <font>
-                              <Font name="Times New Roman" size="24.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label fx:id="lblDensity" text="Density">
+                                 <font>
+                                    <Font name="Times New Roman" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblDensity1" layoutX="84.0" layoutY="10.0" text="&#xb3;">
+                                 <font>
+                                    <Font name="Times New Roman" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                         <Label fx:id="lblEConfig" text="Electron Configuration">
                            <font>
                               <Font name="Times New Roman" size="24.0" />
