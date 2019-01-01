@@ -1,7 +1,5 @@
 package application;
 
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -13,7 +11,7 @@ public class Main extends Application
     	Compound test = new Compound(new Element(6),1,new Element(8),2);
     	System.out.println(test.getSmiles());
 
-    //	launch(args);
+    	launch(args);
     }
 
     @Override

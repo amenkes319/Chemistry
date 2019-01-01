@@ -21,10 +21,10 @@ public class BondController
 	@FXML
 	private Label lblMoleculeShape;
 
-	public BondController(Compound x)
+	public BondController(Compound c)
 	{
 		stgBond = new Stage();
-		comp = x;
+		comp = c;
 		try
 		{
 			stgBond.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));

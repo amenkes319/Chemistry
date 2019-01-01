@@ -1,12 +1,12 @@
 .metadata
-bin
-tmp
+bin\
+tmp\
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.settings
+.settings\
 .loadpath
 .recommenders
 

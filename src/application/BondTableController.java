@@ -92,7 +92,7 @@ public class BondTableController
 
 	private void loadBond(int a1, int a2)
 	{
-		BondController ctrlBond = new BondController(a1, a2);
+		BondController ctrlBond = new BondController(new Compound(new Element(a1), 1, new Element(a2), 2));
 		ctrlBond.showStage();
 		stgBondTable.close();
 	}
