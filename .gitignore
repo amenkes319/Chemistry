@@ -1,12 +1,12 @@
 .metadata
-bin/
-tmp/
+bin
+tmp
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.settings/
+.settings
 .loadpath
 .recommenders
 
@@ -53,3 +53,4 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+*.fxbuild
