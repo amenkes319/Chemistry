@@ -30,8 +30,8 @@ public class Compound
 	public void createContainer()
 	{
 		AtomContainer x = new AtomContainer();
-		Atom one = new Atom("element1.getSymbol");
-		Atom two = new Atom("element2.getSymbol");
+		Atom one = new Atom(element1.getSymbol());
+		Atom two = new Atom(element2.getSymbol());
 
 		for(int i = 0; i<quantity1; i++)
 		{
