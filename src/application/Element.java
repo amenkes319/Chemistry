@@ -64,6 +64,11 @@ public class Element
 		}
 	}
 
+	public int getAtomicNum()
+	{
+		return atomicNum;
+	}
+
 	public String getName()
 	{
 		return name;
@@ -160,13 +165,5 @@ public class Element
 		}
 
 		return numbers;
-	}
-
-	public boolean isMetallic()
-	{
-		if(getType().equals("Nonmetal"))
-			return false;
-
-		return true;
 	}
 }
