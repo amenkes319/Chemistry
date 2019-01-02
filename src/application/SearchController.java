@@ -104,7 +104,7 @@ public class SearchController
 		Scanner scanName = new Scanner(new File("src\\application\\name.txt"));
 		for(int i=1; scanName.hasNextLine(); i++)
 		{
-			if(getAtomName().equalsIgnoreCase(scanName.next()))
+			if(getAtomName().trim().equalsIgnoreCase(scanName.next()))
 			{
 				scanName.close();
 				atomicNum =  i;
@@ -126,7 +126,7 @@ public class SearchController
 		Scanner scanSymbol= new Scanner(new File("src\\application\\symbol.txt"));
 		for(int i=1; scanSymbol.hasNextLine(); i++)
 		{
-			if(getAtomicSymbol().equals(scanSymbol.next()))
+			if(getAtomicSymbol().trim().equals(scanSymbol.next()))
 			{
 				scanSymbol.close();
 				atomicNum =  i;
