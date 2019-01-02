@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -144,7 +146,13 @@ public class BondTableController
 		{
 			choice.getItems().add(compounds.get(i));
 		}
-
+		choice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+		{
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String t, String t1)
+            {
+                 System.out.println(choice.getSelectionModel().getSelectedItem());
+            }
+        });
 	}
-
 }
