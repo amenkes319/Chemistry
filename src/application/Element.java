@@ -79,6 +79,30 @@ public class Element
 		return symbol;
 	}
 
+	public static int symbolToNum(String symbol)
+	{
+		int num = -1;
+		try
+		{
+			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
+
+			for(int i=1; num!=-1; i++)
+			{
+				if(symbol.equals(scanSymbol.next()))
+				{
+					num =  i;
+				}
+			}
+			scanSymbol.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+		return num;
+	}
+
 	public double getAtomicMass()
 	{
 		return mass;

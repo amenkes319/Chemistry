@@ -2,14 +2,14 @@ package application;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.*;
 
 import uk.ac.cam.ch.wwmm.opsin.NameToStructure;
 
 public class Compound
 {
-	String formula;
+	String cformula;
 	String[] name;
 	String smiles;
 	Element element1;
@@ -20,14 +20,9 @@ public class Compound
 	String bondPolarity;
 	String shape;
 
-	public Compound(Element one, int x, Element two, int y)
+	public Compound(String formula)
 	{
-		element1 = one;
-		quantity1 = x;
-		element2 = two;
-		quantity2 = y;
-
-		findFormula();
+		formulaParser(formula);
 		name = searchIUPACName(formula);
 
 		NameToStructure nts = NameToStructure.getInstance();
@@ -40,22 +35,24 @@ public class Compound
 	public static String[] searchIUPACName(String chemicalFormula)
     {
         org.jsoup.nodes.Document doc = null;
-		try 
+
+		try
 		{
 			doc = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php")
 			        .data("Search", "Search").data("name", chemicalFormula).data("sel", "f").post();
-		} 
-		catch (IOException e) 
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+
         org.jsoup.select.Elements elements = doc.getElementById("note").getElementsByClass("cmline");
-        
+
         if (elements.isEmpty())
             return new String[] { "No results" };
-        
+
         String[] names = new String[elements.size() - 1];
-        
+
         for (int i = 1; i < elements.size(); i++)
         {
             names[i - 1] = elements.get(i).getElementsByClass("cmname").get(0).getElementsByTag("a").get(0).text();
@@ -63,7 +60,7 @@ public class Compound
 
         for(int i=0; i<names.length; i++)
         {
-        	try 
+        	try
         	{
 				Scanner scanNames = new Scanner(new File("src\\application\\name.txt"));
 				while(scanNames.hasNextLine())
@@ -83,31 +80,41 @@ public class Compound
 	public static ArrayList<String> searchCompounds(Element element1, Element element2)
 	{
 		ArrayList<String> temp = new ArrayList<String>();
+		String num = "";
 
-		org.jsoup.nodes.Document doc1 = null, doc2 = null;
-		try {
-			doc1 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element1.getSymbol() + " " + element2.getSymbol() ).data("sel", "f").post();
-		} catch (IOException e) {
-			e.printStackTrace();
+		for(int i = 1; i < 6; i++)
+		{
+			if(i>1)
+				num = Integer.toString(i);
+
+			org.jsoup.nodes.Document doc1 = null, doc2 = null;
+			try {
+				doc1 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element1.getSymbol() + num + " " + element2.getSymbol() ).data("sel", "f").post();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				doc2 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element2.getSymbol() + num + " " + element1.getSymbol() ).data("sel", "f").post();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
+			org.jsoup.select.Elements elements1 = doc1.getElementById("note").getElementsByClass("cmline");
+			org.jsoup.select.Elements elements2 = doc2.getElementById("note").getElementsByClass("cmline");
+
+			for(org.jsoup.nodes.Element element : elements1)
+			{
+				temp.add(element.getElementsByClass("cmformula").text());
+			}
+
+			for(org.jsoup.nodes.Element element : elements2)
+			{
+				temp.add(element.getElementsByClass("cmformula").text());
+			}
+
 		}
-		try {
-			doc2 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element2.getSymbol() + " " + element1.getSymbol() ).data("sel", "f").post();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	    org.jsoup.select.Elements elements1 = doc1.getElementById("note").getElementsByClass("cmline");
-	    org.jsoup.select.Elements elements2 = doc2.getElementById("note").getElementsByClass("cmline");
-
-	    for(org.jsoup.nodes.Element element : elements1)
-	    {
-	    	temp.add(element.getElementsByClass("cmformula").text());
-	    }
-
-	    for(org.jsoup.nodes.Element element : elements2)
-	    {
-	    	temp.add(element.getElementsByClass("cmformula").text());
-	    }
 
 	    ArrayList<String> results = new ArrayList<String>();
 
@@ -128,9 +135,75 @@ public class Compound
 	    return results;
 	}
 
-	public void findFormula()
+	public void formulaParser(String formula)
 	{
+		cformula = formula;
 
+        final Stack<Map<String, Integer>> stack = new Stack<>();
+        stack.push(new LinkedHashMap<>());
+        final Pattern pattern = Pattern.compile("([A-Z][a-z]*)(\\d*)|(\\()|(\\))(\\d*)");
+        final Matcher matcher = pattern.matcher(formula);
+
+        while (matcher.find()) {
+            final String match = matcher.group();
+            if (match.equals("(")) {
+                stack.push(new LinkedHashMap<>());
+            } else if (match.startsWith(")")) {
+                final Map<String, Integer> top = stack.pop();
+                final int multiple = match.length() > 1 ? Integer.parseInt(match.substring(1, match.length())) : 1;
+                for (final String name : top.keySet()) {
+                    stack.peek().put(name, stack.peek().getOrDefault(name, 0) + top.get(name) * multiple);
+                }
+            } else {
+                int i = 1;
+                while (i < match.length() && Character.isLowerCase(match.charAt(i))) {
+                    i++;
+                }
+                final String name = match.substring(0, i);
+                final int count = i < match.length() ? Integer.parseInt(match.substring(i, match.length())) : 1;
+                stack.peek().put(name, stack.peek().getOrDefault(name, 0) + count);
+            }
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        for (final String name : stack.peek().keySet()) {
+            sb.append(name);
+            sb.append(" ");
+
+            final int count = stack.peek().get(name);
+            if (count > 0) {
+                sb.append(String.valueOf(count));
+                sb.append(" ");
+            }
+        }
+
+        String[] parsed = sb.toString().split(" ");
+
+        for(int i = 0; i <= 3; i++)
+        {
+        	if(i==0)
+        	{
+        		element1 = new Element(Element.symbolToNum(parsed[i]));
+        	}
+        	else if(i==1)
+        	{
+        		quantity1 = Integer.parseInt(parsed[i]);
+        	}
+        	else if(i==2)
+        	{
+        		element2 = new Element(Element.symbolToNum(parsed[i]));
+        	}
+        	else if(i==3)
+        	{
+        		quantity2 = Integer.parseInt(parsed[i]);
+        	}
+        }
+
+	}
+
+	public String getFormula()
+	{
+		return cformula;
 	}
 
 	public Element getElement1()
@@ -201,9 +274,19 @@ public class Compound
 		quantity1 = num;
 	}
 
+	public int getQuantity1()
+	{
+		return quantity1;
+	}
+
 	public void setQuantity2(int num)
 	{
 		quantity2 = num;
+	}
+
+	public int getQuantity2()
+	{
+		return quantity2;
 	}
 
 	public void setQuantities(int num1, int num2)
@@ -218,51 +301,4 @@ public class Compound
 		return moleculeShape;
 	}
 
-//	public void order()
-//	{
-//		ArrayList<Element> elements = new ArrayList<Element>(Arrays.asList(element1,element2));
-//		ArrayList<String> symbols = new ArrayList<String>(Arrays.asList(element1.getSymbol(), element2.getSymbol()));
-//
-//		if(bondType=="Covalent")
-//		{
-//			int order1 = 0;
-//			int order2 = 0;
-//			int[] orders = new int[]{order1, order2};
-//
-//			Collections.sort(symbols);
-//
-//			if(symbols.contains("C"))
-//			{
-//				for(int i = 0; i < 1; i++)
-//				{
-//					if(symbols.get(i).equals("C"))
-//						orders[i]=0;
-//					else if(symbols.get(i).equals("H"))
-//						orders[i]=1;
-//					else
-//						orders[i]=2;
-//				}
-//			}
-//			else
-//			{
-//				for(int i = 0; i < 1; i++)
-//				{
-//					if(symbols.get(i).equals("H"))
-//						orders[i]=0;
-//					else
-//						orders[i]=1;
-//				}
-//			}
-//			if(orders[1]<orders[0])
-//				Collections.swap(elements, 0, 1);
-//		}
-//		else if(bondType=="Ionic")
-//		{
-//			if(element1.getElectronegativity()>element2.getElectronegativity())
-//				Collections.swap(elements, 0, 1);
-//		}
-//
-//		element1 = elements.get(0);
-//		element2 = elements.get(1);
-//	}
 }
