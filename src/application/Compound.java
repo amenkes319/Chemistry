@@ -106,12 +106,14 @@ public class Compound
 
 			for(org.jsoup.nodes.Element element : elements1)
 			{
-				temp.add(element.getElementsByClass("cmformula").text());
+				if(element.getElementsByClass("cmformula").text()!=null)
+					temp.add(element.getElementsByClass("cmformula").text());
 			}
 
 			for(org.jsoup.nodes.Element element : elements2)
 			{
-				temp.add(element.getElementsByClass("cmformula").text());
+				if(element.getElementsByClass("cmformula").text()!=null)
+					temp.add(element.getElementsByClass("cmformula").text());
 			}
 
 		}
