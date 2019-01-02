@@ -94,7 +94,7 @@ public class ElementInfoController
 		if(element.getElectronegativity() == 0)
 			lblEN.setText("Ionization Energy: N/A");
 		else
-			lblIE.setText("Ionization Energy: " + element.getIonizationEnergy());
+			lblIE.setText("Ionization Energy: " + element.getIonizationEnergy() + "kJ/mol");
 
 
 		if(element.getElectronegativity() == 0)

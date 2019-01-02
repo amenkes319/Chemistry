@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox>
          <children>
@@ -136,7 +136,7 @@
                                     <Font name="Times New Roman" size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblDensity1" layoutX="84.0" layoutY="10.0" text="&#xb3;">
+                              <Label fx:id="lblDensity1" layoutX="84.0" layoutY="10.0" text="³">
                                  <font>
                                     <Font name="Times New Roman" size="24.0" />
                                  </font>

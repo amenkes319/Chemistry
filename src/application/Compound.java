@@ -40,23 +40,31 @@ public class Compound
 	public static String[] searchIUPACName(String chemicalFormula)
     {
         org.jsoup.nodes.Document doc = null;
-		try {
+		try 
+		{
 			doc = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php")
 			        .data("Search", "Search").data("name", chemicalFormula).data("sel", "f").post();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
         org.jsoup.select.Elements elements = doc.getElementById("note").getElementsByClass("cmline");
+        
         if (elements.isEmpty())
             return new String[] { "No results" };
+        
         String[] names = new String[elements.size() - 1];
-        for (int i = 1; i < elements.size(); i++) {
+        
+        for (int i = 1; i < elements.size(); i++)
+        {
             names[i - 1] = elements.get(i).getElementsByClass("cmname").get(0).getElementsByTag("a").get(0).text();
         }
 
         for(int i=0; i<names.length; i++)
         {
-        	try {
+        	try 
+        	{
 				Scanner scanNames = new Scanner(new File("src\\application\\name.txt"));
 				while(scanNames.hasNextLine())
 				{
