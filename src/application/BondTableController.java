@@ -1,9 +1,12 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import org.apache.log4j.helpers.Loader;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -64,11 +67,20 @@ public class BondTableController
 	{
 		stgBondTable.show();
 	}
+
 	public void loadBack()
 	{
 		MainMenuController ctrlMenu = new MainMenuController();
         ctrlMenu.showStage();
         stgBondTable.close();
+	}
+
+	public void loadClear()
+	{
+		BondTableController ctrlBondTable = new BondTableController();
+		ctrlBondTable.showStage();
+		stgBondTable.close();
+
 	}
 
 	public void isPressed(ActionEvent event)
@@ -119,7 +131,7 @@ public class BondTableController
 					element2 = new Element(element2.getAtomicNum()+1);
 				}
 			}
-			
+
 			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
 			scanSymbol.close();
 		}

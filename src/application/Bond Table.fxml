@@ -20,6 +20,8 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadBack" text="Back" />
+                  <Pane prefHeight="25.0" prefWidth="815.0" />
+                  <Button mnemonicParsing="false" onAction="#loadClear" text="Clear" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
