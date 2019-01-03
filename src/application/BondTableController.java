@@ -105,7 +105,6 @@ public class BondTableController
 				style2 = null;
 				second = null;
 
-
 				scanSymbol.close();
 				elementCounter--;
 
@@ -143,10 +142,15 @@ public class BondTableController
 				button.setSelected(true);
 				element1 = new Element(1);
 
-				while(!scanSymbol.nextLine().equals(symbol))
+				int num = 0;
+
+				for(int i = 0; !scanSymbol.nextLine().equals(symbol); i++)
 				{
-					element1 = new Element(element1.getAtomicNum()+1);
+					num = i;
 				}
+				System.out.println(num+2);
+
+				element2 = new Element(num+2);
 
 				elementCounter++;
 				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
@@ -160,10 +164,15 @@ public class BondTableController
 				button.setSelected(true);
 				element2 = new Element(1);
 
-				while(!scanSymbol.nextLine().equals(symbol))
+				int num = 0;
+
+				for(int i = 0; !scanSymbol.nextLine().equals(symbol); i++)
 				{
-					element2 = new Element(element2.getAtomicNum()+1);
+					num = i;
 				}
+
+				System.out.println(num+2);
+				element2 = new Element(num+2);
 
 				elementCounter++;
 				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");

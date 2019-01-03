@@ -12,7 +12,6 @@ public class Main extends Application
     }
 
     @Override
-
     public void start(Stage primaryStage)
     {
     	primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
