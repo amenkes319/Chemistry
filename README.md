@@ -1,4 +1,5 @@
 
 # Chemistry Project
-# element database.txt WIP
-# Bonding WIP
+Bonding WIP
+Search Functional
+Periodic Table Functional
