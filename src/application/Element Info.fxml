@@ -136,7 +136,7 @@
                                     <Font name="Times New Roman" size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblDensity1" layoutX="84.0" layoutY="10.0" text="³">
+                              <Label fx:id="lblDensitySuper" layoutX="84.0" layoutY="10.0" text="³">
                                  <font>
                                     <Font name="Times New Roman" size="24.0" />
                                  </font>

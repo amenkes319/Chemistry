@@ -86,7 +86,7 @@ public class Element
 		{
 			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
 
-			for(int i=1; num!=-1; i++)
+			for(int i=1; num == -1; i++)
 			{
 				if(symbol.equals(scanSymbol.next()))
 				{

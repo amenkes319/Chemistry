@@ -149,6 +149,22 @@ public class Compound
 	    str = str.replaceAll("9", "₉");
 	    return str;
 	}
+
+	public static String removeSubscript(String str)
+	{
+	    str = str.replaceAll("₀", "0");
+	    str = str.replaceAll("₁", "1");
+	    str = str.replaceAll("₂", "2");
+	    str = str.replaceAll("₃", "3");
+	    str = str.replaceAll("₄", "4");
+	    str = str.replaceAll("₅", "5");
+	    str = str.replaceAll("₆", "6");
+	    str = str.replaceAll("₇", "7");
+	    str = str.replaceAll("₈", "8");
+	    str = str.replaceAll("₉", "9");
+	    return str;
+	}
+
 	public void formulaParser(String formula)
 	{
 		cformula = formula;

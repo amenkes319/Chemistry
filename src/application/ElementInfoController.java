@@ -10,8 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class ElementInfoController
-{
+public class ElementInfoController {
 	Stage stgElementInfo;
 	Stage stgBack;
 	int atomicNum;
@@ -46,6 +45,8 @@ public class ElementInfoController
 	@FXML
 	private Label lblDensity = new Label();
 	@FXML
+	private Label lblDensitySuper = new Label();
+	@FXML
 	private Label lblRadius = new Label();
 	@FXML
 	private Label lblEConfig = new Label();
@@ -56,13 +57,11 @@ public class ElementInfoController
 	@FXML
 	private Label lblOxidState = new Label();
 
-	public ElementInfoController(int a, Stage s)
-	{
+	public ElementInfoController(int a, Stage s) {
 		atomicNum = a;
 		stgBack = s;
 		stgElementInfo = new Stage();
-		try
-		{
+		try {
 			stgElementInfo.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Element Info.fxml"));
 
@@ -70,9 +69,7 @@ public class ElementInfoController
 
 			stgElementInfo.setScene(new Scene(loader.load()));
 			stgElementInfo.setTitle("Element Info");
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -91,7 +88,7 @@ public class ElementInfoController
 		lblPeriod.setText("Period: " + element.getPeriod());
 		lblDiatomic.setText(element.getDiatomic());
 
-		if(element.getElectronegativity() == 0)
+		if(element.getIonizationEnergy() == 0)
 			lblEN.setText("Ionization Energy: N/A");
 		else
 			lblIE.setText("Ionization Energy: " + element.getIonizationEnergy() + "kJ/mol");
@@ -113,7 +110,10 @@ public class ElementInfoController
 			lblBoilingPt.setText("Boiling Point: " + element.getBoilingPoint() + "K");
 
 		if(element.getDensity() == 0)
+		{
 			lblDensity.setText("Density: N/A");
+			lblDensitySuper.setVisible(false);
+		}
 		else
 			lblDensity.setText("Density: " + df.format(element.getDensity()) + "g/cm");
 
@@ -124,19 +124,16 @@ public class ElementInfoController
 		lblOxidState.setText("Oxidation State(s): " + element.getOxidationState());
 	}
 
-	public void showStage()
-	{
+	public void showStage() {
 		stgElementInfo.show();
 	}
 
-	public void loadBack()
-	{
+	public void loadBack() {
 		stgElementInfo.close();
 		stgBack.show();
 	}
 
-	public void loadMenu()
-	{
+	public void loadMenu() {
 		MainMenuController ctrlMenu = new MainMenuController();
 		ctrlMenu.showStage();
 		stgElementInfo.close();

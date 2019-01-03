@@ -11,11 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class BondTableController
@@ -34,7 +35,7 @@ public class BondTableController
 	@FXML
 	private Label lblSelect;
 	@FXML
-	private ChoiceBox<String> choice;
+	private ComboBox<Text> combo;
 
 	public BondTableController()
 	{
@@ -131,9 +132,9 @@ public class BondTableController
 			displayCompounds(Compound.searchCompounds(element1, element2));
 	}
 
-	private void loadBond(Compound comp)
+	private void loadBond(String formula)
 	{
-		BondController ctrlBond = new BondController(comp);
+		BondController ctrlBond = new BondController(new Compound(formula));
 		ctrlBond.showStage();
 		stgBondTable.close();
 	}
@@ -141,18 +142,23 @@ public class BondTableController
 	public void displayCompounds(ArrayList<String> compounds)
 	{
 		lblSelect.setText("Select a Compound");
-		choice.setVisible(true);
+		combo.setVisible(true);
+
 		for(int i = 0; i < compounds.size(); i++)
 		{
-			choice.getItems().add(compounds.get(i));
+			Text compound = new Text(compounds.get(i));
+			compound.setFont(new Font(25));
+			combo.getItems().add(compound);
 		}
-		choice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+
+		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Text>()
 		{
             @Override
-            public void changed(ObservableValue<? extends String> ov, String t, String t1)
+            public void changed(ObservableValue<? extends Text> ov, Text t, Text t1)
             {
-                 System.out.println(choice.getSelectionModel().getSelectedItem());
+                loadBond(Compound.removeSubscript(combo.getSelectionModel().getSelectedItem().getText()));
             }
         });
+
 	}
 }
