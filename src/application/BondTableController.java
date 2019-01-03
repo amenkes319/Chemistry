@@ -148,7 +148,6 @@ public class BondTableController
 				{
 					num = i;
 				}
-				System.out.println(num+2);
 
 				element2 = new Element(num+2);
 
@@ -171,7 +170,6 @@ public class BondTableController
 					num = i;
 				}
 
-				System.out.println(num+2);
 				element2 = new Element(num+2);
 
 				elementCounter++;
