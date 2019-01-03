@@ -119,7 +119,7 @@ public class BondTableController
 					element2 = new Element(element2.getAtomicNum()+1);
 				}
 			}
-
+			
 			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
 			scanSymbol.close();
 		}
