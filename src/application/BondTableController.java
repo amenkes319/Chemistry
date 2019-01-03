@@ -118,8 +118,7 @@ public class BondTableController
 				}
 			}
 
-			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black");
-			((ToggleButton)event.getSource()).setStyle("-fx-background-color: white");
+			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black; -fx-background-color: white");
 			scanSymbol.close();
 		}
 		catch(Exception e)
