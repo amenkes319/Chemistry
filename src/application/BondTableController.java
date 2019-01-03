@@ -147,7 +147,6 @@ public class BondTableController
 				{
 					element1 = new Element(element1.getAtomicNum()+1);
 				}
-				System.out.println("1 = " + element1.getSymbol());
 
 				elementCounter++;
 				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
@@ -165,7 +164,6 @@ public class BondTableController
 				{
 					element2 = new Element(element2.getAtomicNum()+1);
 				}
-				System.out.println("2 = " + element2.getSymbol());
 
 				elementCounter++;
 				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
