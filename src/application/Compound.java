@@ -82,27 +82,27 @@ public class Compound
 		ArrayList<String> temp = new ArrayList<String>();
 		String num = "";
 
-		for(int i = 1; i < 6; i++)
+		org.jsoup.nodes.Document doc1 = null, doc2 = null;
+		org.jsoup.select.Elements elements1 = null, elements2 = null;
+
+		try {
+			doc1 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element1.getSymbol() + num + " " + element2.getSymbol() ).data("sel", "f").post();
+			elements1 = doc1.getElementById("note").getElementsByClass("cmline");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			doc2 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element2.getSymbol() + num + " " + element1.getSymbol() ).data("sel", "f").post();
+			elements2 = doc2.getElementById("note").getElementsByClass("cmline");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<String> results = new ArrayList<String>();
+
+		if(elements1!=null && elements2!=null)
 		{
-			if(i>1)
-				num = Integer.toString(i);
-
-			org.jsoup.nodes.Document doc1 = null, doc2 = null;
-			try {
-				doc1 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element1.getSymbol() + num + " " + element2.getSymbol() ).data("sel", "f").post();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			try {
-				doc2 = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php").data("Search", "Search").data("name", element2.getSymbol() + num + " " + element1.getSymbol() ).data("sel", "f").post();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-
-			org.jsoup.select.Elements elements1 = doc1.getElementById("note").getElementsByClass("cmline");
-			org.jsoup.select.Elements elements2 = doc2.getElementById("note").getElementsByClass("cmline");
 
 			for(org.jsoup.nodes.Element element : elements1)
 			{
@@ -116,18 +116,16 @@ public class Compound
 					temp.add(element.getElementsByClass("cmformula").text());
 			}
 
+
+		    for(int i = 0; i<temp.size(); i++)
+		    {
+		    	if(element1.getSymbol().length() + element2.getSymbol().length() == temp.get(i).replaceAll("\\d", "").length() && temp.get(i).contains(element1.getSymbol())
+		    			&& temp.get(i).contains(element2.getSymbol()) && !results.contains(subscript(temp.get(i))))
+		    	{
+		    		results.add(subscript(temp.get(i)));
+		    	}
+		    }
 		}
-
-	    ArrayList<String> results = new ArrayList<String>();
-
-	    for(int i = 0; i<temp.size(); i++)
-	    {
-	    	if(element1.getSymbol().length() + element2.getSymbol().length() == temp.get(i).replaceAll("\\d", "").length() && temp.get(i).contains(element1.getSymbol())
-	    			&& temp.get(i).contains(element2.getSymbol()) && !results.contains(temp.get(i)))
-	    	{
-	    		results.add(temp.get(i));
-	    	}
-	    }
 
 	    if (results.isEmpty())
 	    {
@@ -137,6 +135,20 @@ public class Compound
 	    return results;
 	}
 
+	public static String subscript(String str)
+	{
+	    str = str.replaceAll("0", "₀");
+	    str = str.replaceAll("1", "₁");
+	    str = str.replaceAll("2", "₂");
+	    str = str.replaceAll("3", "₃");
+	    str = str.replaceAll("4", "₄");
+	    str = str.replaceAll("5", "₅");
+	    str = str.replaceAll("6", "₆");
+	    str = str.replaceAll("7", "₇");
+	    str = str.replaceAll("8", "₈");
+	    str = str.replaceAll("9", "₉");
+	    return str;
+	}
 	public void formulaParser(String formula)
 	{
 		cformula = formula;
@@ -302,5 +314,7 @@ public class Compound
 		String moleculeShape = "Shape";
 		return moleculeShape;
 	}
+
+
 
 }
