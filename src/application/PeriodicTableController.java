@@ -1,6 +1,6 @@
 package application;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import javafx.event.ActionEvent;
@@ -51,7 +51,9 @@ public class PeriodicTableController
 		atomicNum = 1;
 		try
 		{
-			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
+			InputStream in = PeriodicTableController.class.getResourceAsStream("/resources/symbol.txt");
+			Scanner scanSymbol = new Scanner(in);
+
 			while(!scanSymbol.nextLine().equals(symbol))
 			{
 				atomicNum++;

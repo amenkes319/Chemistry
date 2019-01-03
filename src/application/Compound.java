@@ -1,9 +1,13 @@
 package application;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
-import java.util.regex.*;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import uk.ac.cam.ch.wwmm.opsin.NameToStructure;
 
@@ -32,7 +36,7 @@ public class Compound
 		findBondType();
 	}
 
-	public static String[] searchIUPACName(String chemicalFormula)
+	public String[] searchIUPACName(String chemicalFormula)
     {
         org.jsoup.nodes.Document doc = null;
 
@@ -62,14 +66,15 @@ public class Compound
         {
         	try
         	{
-				Scanner scanNames = new Scanner(new File("src\\application\\name.txt"));
+        		InputStream in = Compound.class.getResourceAsStream("/resources/name.txt");
+				Scanner scanNames = new Scanner(in);
 				while(scanNames.hasNextLine())
 				{
 					if(names[i].equals(scanNames.nextLine()))
 							names[i] = "";
 				}
 				scanNames.close();
-			} catch (FileNotFoundException e) {
+			} catch (Error e) {
 				e.printStackTrace();
 			}
         }
@@ -213,7 +218,7 @@ public class Compound
         {
         	if(i==0)
         	{
-        		element1 = new Element(Element.symbolToNum(parsed[i]));
+        		element1 = new Element(symbolToNum(parsed[i]));
         	}
         	else if(i==1)
         	{
@@ -221,7 +226,7 @@ public class Compound
         	}
         	else if(i==2)
         	{
-        		element2 = new Element(Element.symbolToNum(parsed[i]));
+        		element2 = new Element(symbolToNum(parsed[i]));
         	}
         	else if(i==3)
         	{
@@ -229,6 +234,31 @@ public class Compound
         	}
         }
 
+	}
+
+	public int symbolToNum(String symbol)
+	{
+		int num = -1;
+		try
+		{
+			InputStream in = Compound.class.getResourceAsStream("/resources/symbol.txt");
+			Scanner scanSymbol = new Scanner(in);
+
+			for(int i=1; num == -1; i++)
+			{
+				if(symbol.equals(scanSymbol.next()))
+				{
+					num =  i;
+				}
+			}
+			scanSymbol.close();
+		}
+		catch (Error e)
+		{
+			e.printStackTrace();
+		}
+
+		return num;
 	}
 
 	public String getFormula()

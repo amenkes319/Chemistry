@@ -30,7 +30,8 @@ public class Element
 
 		try
 		{
-			Scanner scanInfo = new Scanner(new File("src\\application\\element database.txt"));
+			InputStream in = Element.class.getResourceAsStream("/resources/element database.txt");
+			Scanner scanInfo = new Scanner(in);
 
 			for(int i=0; i<(atomicNum-1) * 18;i++)
 			{
@@ -58,7 +59,7 @@ public class Element
 
 			scanInfo.close();
 		}
-		catch(IOException e)
+		catch(Error e)
 		{
 			e.printStackTrace();
 		}
@@ -79,12 +80,13 @@ public class Element
 		return symbol;
 	}
 
-	public static int symbolToNum(String symbol)
+	public int symbolToNum(String symbol)
 	{
 		int num = -1;
 		try
 		{
-			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
+			InputStream in = Element.class.getResourceAsStream("/resources/symbol.txt");
+			Scanner scanSymbol = new Scanner(in);
 
 			for(int i=1; num == -1; i++)
 			{
@@ -95,7 +97,7 @@ public class Element
 			}
 			scanSymbol.close();
 		}
-		catch (FileNotFoundException e)
+		catch (Error e)
 		{
 			e.printStackTrace();
 		}

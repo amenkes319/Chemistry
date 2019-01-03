@@ -1,7 +1,9 @@
 package application;
 
+import java.io.InputStream;
 import java.util.Scanner;
-import java.io.*;
+
+import javax.annotation.Resource;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,7 +103,8 @@ public class SearchController
 
 	public void nameToAtomicNum() throws Exception
 	{
-		Scanner scanName = new Scanner(new File("src\\application\\name.txt"));
+		InputStream in = SearchController.class.getResourceAsStream("/resources/name.txt");
+		Scanner scanName = new Scanner(in);
 		for(int i=1; scanName.hasNextLine(); i++)
 		{
 			if(getAtomName().trim().equalsIgnoreCase(scanName.next()))
@@ -123,7 +126,8 @@ public class SearchController
 
 	public void symbolToAtomicNum() throws Exception
 	{
-		Scanner scanSymbol= new Scanner(new File("src\\application\\symbol.txt"));
+		InputStream in = SearchController.class.getResourceAsStream("/resources/symbol.txt");
+		Scanner scanSymbol = new Scanner(in);
 		for(int i=1; scanSymbol.hasNextLine(); i++)
 		{
 			if(getAtomicSymbol().trim().equals(scanSymbol.next()))

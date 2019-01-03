@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -76,7 +77,8 @@ public class BondTableController
 
 		try
 		{
-			Scanner scanSymbol = new Scanner(new File("src\\application\\symbol.txt"));
+			InputStream in = BondTableController.class.getResourceAsStream("/resources/symbol.txt");
+			Scanner scanSymbol = new Scanner(in);
 
 			if(((ToggleButton)event.getSource()).isSelected() && ((ToggleButton)event.getSource()).getText()==first && elementCounter>0)
 			{
@@ -118,8 +120,7 @@ public class BondTableController
 				}
 			}
 
-			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black");
-			((ToggleButton)event.getSource()).setStyle("-fx-background-color: white");
+			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
 			scanSymbol.close();
 		}
 		catch(Exception e)
