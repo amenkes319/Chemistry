@@ -1,12 +1,8 @@
 package application;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import org.apache.log4j.helpers.Loader;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -27,6 +24,8 @@ public class BondTableController
 {
 	Stage stgBondTable;
 	int elementCounter;
+	ToggleGroup one;
+	ToggleGroup two;
 	Element element1;
 	Element element2;
 	String style1;
@@ -85,64 +84,105 @@ public class BondTableController
 
 	public void isPressed(ActionEvent event)
 	{
-		String symbol = (((ToggleButton)event.getSource()).getText());
-
 		try
 		{
 			InputStream in = BondTableController.class.getResourceAsStream("/resources/symbol.txt");
 			Scanner scanSymbol = new Scanner(in);
+			ToggleButton button = (ToggleButton)event.getSource();
+			String symbol = button.getText();
 
-			if(((ToggleButton)event.getSource()).isSelected() && ((ToggleButton)event.getSource()).getText()==first && elementCounter>0)
+			if(!button.isSelected() && symbol.equals(first))
 			{
-				((ToggleButton)event.getSource()).setStyle(style1);
-				((ToggleButton)event.getSource()).setSelected(false);
-				style1 = "";
+				button.setSelected(false);
+				button.setToggleGroup(null);
+				button.setStyle(style1);
+
+				element1 = element2;
+				style1 = style2;
+				first = second;
+
+				element2 = null;
+				style2 = null;
+				second = null;
+
+
 				scanSymbol.close();
 				elementCounter--;
+
+				lblSelect.setText("Select 2 Elements to Bond Together");
+				combo.setVisible(false);
+				combo.getItems().clear();
 
 				return;
 			}
-			else if(((ToggleButton)event.getSource()).isSelected() && ((ToggleButton)event.getSource()).getText()==second && elementCounter>0)
+			else if(!button.isSelected() && symbol.equals(second))
 			{
-				((ToggleButton)event.getSource()).setStyle(style2);
-				((ToggleButton)event.getSource()).setSelected(false);
-				style2 = "";
-				elementCounter--;
+				button.setSelected(false);
+				button.setToggleGroup(null);
+				button.setStyle(style2);
+
+				element2 = null;
+				style2 = null;
+				second = null;
+
 				scanSymbol.close();
+				elementCounter--;
+
+				lblSelect.setText("Select 2 Elements to Bond Together");
+				combo.setVisible(false);
+				combo.getItems().clear();
 
 				return;
 			}
 
 			if(elementCounter == 0)
 			{
-				first = ((ToggleButton)event.getSource()).getText();
-				style1 = ((ToggleButton)event.getSource()).getStyle();
+				button.setToggleGroup(one);
+				first = button.getText();
+				style1 = button.getStyle();
+				button.setSelected(true);
+				element1 = new Element(1);
+
 				while(!scanSymbol.nextLine().equals(symbol))
 				{
 					element1 = new Element(element1.getAtomicNum()+1);
 				}
+				System.out.println("1 = " + element1.getSymbol());
+
+				elementCounter++;
+				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
+				scanSymbol.close();
 			}
 			else if(elementCounter == 1)
 			{
-				second = ((ToggleButton)event.getSource()).getText();
-				style2 = ((ToggleButton)event.getSource()).getStyle();
+				button.setToggleGroup(two);
+				second = button.getText();
+				style2 = button.getStyle();
+				button.setSelected(true);
+				element2 = new Element(1);
+
 				while(!scanSymbol.nextLine().equals(symbol))
 				{
 					element2 = new Element(element2.getAtomicNum()+1);
 				}
+				System.out.println("2 = " + element2.getSymbol());
+
+				elementCounter++;
+				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
+				scanSymbol.close();
 			}
 
-			((ToggleButton)event.getSource()).setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
-			scanSymbol.close();
+			if(elementCounter == 2 && combo.getItems().isEmpty())
+			{
+				displayCompounds(Compound.searchCompounds(element1, element2));
+				scanSymbol.close();
+			}
+
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-
-		elementCounter++;
-		if(elementCounter == 2)
-			displayCompounds(Compound.searchCompounds(element1, element2));
 	}
 
 	private void loadBond(String formula)
@@ -161,7 +201,10 @@ public class BondTableController
 		{
 			Text compound = new Text(compounds.get(i));
 			compound.setFont(new Font(25));
-			combo.getItems().add(compound);
+			if(!compound.getText().equals(""))
+			{
+				combo.getItems().add(compound);
+			}
 		}
 
 		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Text>()
