@@ -1,17 +1,9 @@
 package application;
 
-import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import org.jsoup.Connection.Response;
-import org.jsoup.Jsoup;
-import org.openscience.cdk.CDKConstants;
-import org.openscience.cdk.depict.DepictionGenerator;
-import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.interfaces.IChemObjectBuilder;
-import org.openscience.cdk.silent.SilentChemObjectBuilder;
-import org.openscience.cdk.smiles.SmilesParser;
+import java.io.InputStream;
+import java.net.URL;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +38,7 @@ public class BondController
 			loader.setController(this);
 			stgBond.setScene(new Scene(loader.load()));
 			stgBond.setTitle("Bond");
-			//display();
+			display();
 		}
 		catch(Exception e)
 		{
@@ -62,57 +54,50 @@ public class BondController
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 	}
 
-	public void displayImage() throws Exception
-	{
-		IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
-	    SmilesParser smipar = new SmilesParser(bldr);
-	    String path = BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(0, BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().length()-5);
-
-	    IAtomContainer mol = smipar.parseSmiles(comp.getSmiles());
-	    mol.setProperty(CDKConstants.TITLE, comp.getName());
-
-	    DepictionGenerator dptgen = new DepictionGenerator();
-	    dptgen.withSize(200, 250).withMolTitle().withTitleColor(Color.DARK_GRAY);
-	    dptgen.depict(mol).writeTo("/structure.png", path + "/src/resources");
-	}
-
-	//public void display()
+	public void display()
 	{
 		org.jsoup.nodes.Document doc = null;
-		String CID;
-
-		try
+    	try
 		{
-			System.out.println(comp.getName().replaceAll(" ", "%20"));
-			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/compound/" + comp.getName().replaceAll(" ", "%20")).post();
+			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ " + comp.getName().replaceAll(" ","%20") + "/record/SDF/?record_type=2d&response_type=display").get();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 
-        org.jsoup.select.Elements elements = doc.getAllElements();
+        String CID;
 
-        if (elements.isEmpty())
+        if (false)
         {
             CID = "No results";
         }
         else
         {
-        	for(int i = 0; i<elements.size(); i++)
-        	{
-        		CID = elements.get(i).text();
-        		System.out.println(CID);
-        	}
-
+        	CID = doc.getAllElements().text().split(" ")[0];
+                System.out.println(CID.split(" ")[0]);
         	try
     		{
-    			//doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=" + CID + "&width=500&height=500").post();
-    			Response resultImageResponse = Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=" + CID + "&width=500&height=500").ignoreContentType(true).execute();
+    			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=" + CID + "&width=500&height=500").get();
+                        org.jsoup.select.Elements img = doc.getElementsByTag("img");
     			String path = BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(0, BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().length()-5) + "/src/resources";
     			FileOutputStream out = (new FileOutputStream(new java.io.File(path + "structure.png")));
-    			out.write(resultImageResponse.bodyAsBytes());
-    			out.close();
+                String src = null;        
+    			
+                        for(org.jsoup.nodes.Element el : img)
+                        {
+                        	src = el.absUrl("src");
+                        }
+                        URL url = new URL(src);
+                        InputStream in = url.openStream();
+                        
+                        for (int b; (b = in.read()) != -1;) 
+                        {
+                            out.write(b);
+                        }
+
+                        in.close();
+                        out.close();
     		}
     		catch (IOException e)
     		{

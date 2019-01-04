@@ -1,4 +1,5 @@
 package application;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -142,7 +143,7 @@ public class Compound
 
 	public static String subscript(String str)
 	{
-	    str = str.replaceAll("0", "₀");
+		str = str.replaceAll("0", "₀");
 	    str = str.replaceAll("1", "₁");
 	    str = str.replaceAll("2", "₂");
 	    str = str.replaceAll("3", "₃");
@@ -157,7 +158,7 @@ public class Compound
 
 	public static String removeSubscript(String str)
 	{
-	    str = str.replaceAll("₀", "0");
+		str = str.replaceAll("₀", "0");
 	    str = str.replaceAll("₁", "1");
 	    str = str.replaceAll("₂", "2");
 	    str = str.replaceAll("₃", "3");
