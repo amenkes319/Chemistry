@@ -24,6 +24,8 @@ public class Compound
 	String bondType;
 	String bondPolarity;
 	String shape;
+	String moleculeShape;
+	String moleculePolarity;
 
 	public Compound(String formula)
 	{
@@ -35,6 +37,8 @@ public class Compound
 
 		findBondPolarity();
 		findBondType();
+		findMoleculeShape();
+		findMoleculePolarity();
 	}
 
 	public String[] searchIUPACName(String chemicalFormula)
@@ -292,42 +296,24 @@ public class Compound
     	return "Not Found";
     }
 
-	public void findBondType()
-	{
-		if(element1.getType()=="Metal" && element2.getType() == "Metal")
-			bondType = "Metallic";
-		else if(bondPolarity == "Nonpolar" || bondPolarity == "Polar")
-			bondType = "Covalent";
-		else if(bondPolarity == "Ionic")
-			bondType = "Ionic";
-	}
-
 	public String getBondType()
 	{
 		return bondType;
 	}
 
-	public void findBondPolarity()
-	{
-		String polarity = null;
-
-		Double e1 = element1.getElectronegativity();
-		Double e2 = element2.getElectronegativity();
-		Double difference = (Math.max(e1, e2) - Math.min(e1,e2));
-
-		if( difference >= 0 && difference <=.3 )
-			polarity = "Nonpolar";
-		else if( difference > .3 && difference <= 1.7)
-			polarity = "Polar";
-		else if(difference > 1.7)
-			polarity = "Ionic";
-
-		bondPolarity = polarity;
-	}
-
 	public String getBondPolarity()
 	{
 		return bondPolarity;
+	}
+
+	public String getMoleculeShape()
+	{
+		return moleculeShape;
+	}
+
+	public String getMoleculePolarity()
+	{
+		return moleculePolarity;
 	}
 
 	public void setQuantity1(int num)
@@ -356,12 +342,47 @@ public class Compound
 		quantity2 = num2;
 	}
 
-	public String getMoleculeShape()
+	private void findBondPolarity()
 	{
-		String moleculeShape = "Shape";
-		return moleculeShape;
+		String polarity = null;
+
+		Double e1 = element1.getElectronegativity();
+		Double e2 = element2.getElectronegativity();
+		Double difference = (Math.max(e1, e2) - Math.min(e1,e2));
+
+		if( difference >= 0 && difference <=.3 )
+			polarity = "Nonpolar";
+		else if( difference > .3 && difference <= 1.7)
+			polarity = "Polar";
+		else if(difference > 1.7)
+			polarity = "Ionic";
+
+		bondPolarity = polarity;
 	}
 
+	private void findBondType()
+	{
+		if(element1.getType()=="Metal" && element2.getType() == "Metal")
+			bondType = "Metallic";
+		else if(bondPolarity == "Nonpolar" || bondPolarity == "Polar")
+			bondType = "Covalent";
+		else if(bondPolarity == "Ionic")
+			bondType = "Ionic";
+	}
 
+	private void findMoleculeShape()
+	{
+		moleculeShape = "Shape";
+	}
 
+	private void findMoleculePolarity()
+	{
+
+		if(getMoleculeShape().equalsIgnoreCase("Linear") || getMoleculeShape().equalsIgnoreCase("Planar") ||
+		   getMoleculeShape().equalsIgnoreCase("Tetrahedral") || getMoleculeShape().equalsIgnoreCase("Octahedral") ||
+		   getMoleculeShape().equalsIgnoreCase("Square Planar"))
+			moleculePolarity = "Nonpolar";
+		else
+			moleculePolarity = "Polar";
+	}
 }
