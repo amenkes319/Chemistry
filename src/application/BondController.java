@@ -79,7 +79,7 @@ public class BondController
 
 		File file = new File("src/resources/structure.png");
 		Image image = new Image(file.toURI().toString());
-		Rectangle2D viewportRect = new Rectangle2D(500, 500, 1000, 1000);
+		Rectangle2D viewportRect = new Rectangle2D(50, 50, 100, 100);
         imgStructure.setViewport(viewportRect);
 		imgStructure.setImage(image);
 

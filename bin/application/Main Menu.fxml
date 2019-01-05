@@ -6,16 +6,16 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" prefHeight="345.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnOpenSearch" mnemonicParsing="false" onAction="#loadSearch" prefHeight="65.0" prefWidth="125.0" style="-fx-background-color: #fc5555; -fx-border-color: #000000;" text="Search">
+            <Button fx:id="btnOpenSearch" mnemonicParsing="false" onAction="#loadSearch" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #fc5555; -fx-border-color: #000000;" text="Search">
                <font>
-                  <Font size="20.0" />
+                  <Font size="28.0" />
                </font>
             </Button>
-            <Button fx:id="btnOpenPT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadPeriodicTable" prefHeight="65.0" prefWidth="125.0" style="-fx-background-color: #F36302; -fx-border-color: #000000;" text="Periodic Table">
+            <Button fx:id="btnOpenPT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadPeriodicTable" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FDCE06; -fx-border-color: #000000;" text="Periodic Table">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -23,10 +23,10 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <font>
-                  <Font size="16.0" />
+                  <Font size="26.0" />
                </font>
             </Button>
-            <Button fx:id="btnOpenCompare" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadCompare" prefHeight="65.0" prefWidth="125.0" style="-fx-background-color: #FDCE06; -fx-border-color: #000000;" text="Compare">
+            <Button fx:id="btnOpenBond" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadBond" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #00E157; -fx-border-color: #000000;" text="Bond">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -34,18 +34,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnOpenBond" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadBond" prefHeight="65.0" prefWidth="125.0" style="-fx-background-color: #00E157; -fx-border-color: #000000;" text="Bond">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="20.0" />
+                  <Font size="28.0" />
                </font>
             </Button>
          </children>
@@ -55,11 +44,11 @@
       </VBox>
    </center>
    <top>
-      <VBox prefHeight="55.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="77.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="55.0" prefWidth="500.0" text="Click on of the buttons to start">
+            <Label alignment="CENTER" text="Click on of the buttons to start">
                <font>
-                  <Font size="24.0" />
+                  <Font size="32.0" />
                </font>
             </Label>
          </children>

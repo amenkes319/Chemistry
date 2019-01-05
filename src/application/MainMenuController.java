@@ -15,8 +15,6 @@ public class MainMenuController
 	@FXML
 	private Button btnOpenPT;
 	@FXML
-	private Button btnOpenCompare;
-	@FXML
 	private Button btnOpenBond;
 
 	public MainMenuController()
@@ -53,13 +51,6 @@ public class MainMenuController
 	{
 		PeriodicTableController ctrlPeriodicTable = new PeriodicTableController();
 		ctrlPeriodicTable.showStage();
-		stgMainMenu.close();
-	}
-
-	public void loadCompare()
-	{
-		CompareController ctrlCompare = new CompareController();
-		ctrlCompare.showStage();
 		stgMainMenu.close();
 	}
 
