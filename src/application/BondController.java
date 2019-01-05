@@ -1,11 +1,15 @@
 package application;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -13,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class BondController
@@ -20,6 +25,8 @@ public class BondController
 	Stage stgBond;
 	Compound comp;
 
+	@FXML
+	private ImageView imgStructure;
 	@FXML
 	private Label lblName;
 	@FXML
@@ -33,6 +40,7 @@ public class BondController
 	{
 		stgBond = new Stage();
 		comp = c;
+		imgStructure = new ImageView();
 		try
 		{
 			stgBond.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
@@ -41,7 +49,7 @@ public class BondController
 			loader.setController(this);
 			stgBond.setScene(new Scene(loader.load()));
 			stgBond.setTitle("Bond");
-			display(0);
+			init();
 		}
 		catch(Exception e)
 		{
@@ -49,14 +57,29 @@ public class BondController
 		}
 	}
 
-	public void initialize()
+	public void init()
 	{
+		try
+		{
+			display(0);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
 		lblName.setText(comp.getName()[0]);
+
 		if(lblName.getText().equals("Hydrogen Fluoride"))
 			lblName.setText("Hydrofluoric Acid");
+
 		lblType.setText(comp.getBondType());
 		lblPolarity.setText(comp.getBondPolarity());
 		lblMoleculeShape.setText(comp.getMoleculeShape());
+
+		File file = new File("src/resources/structure.png");
+		Image image = new Image(file.toURI().toString());
+		imgStructure.setImage(image);
 	}
 
 	public void display(int i) throws IOException

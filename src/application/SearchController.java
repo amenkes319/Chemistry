@@ -3,8 +3,6 @@ package application;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import javax.annotation.Resource;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

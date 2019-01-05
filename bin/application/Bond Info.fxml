@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -26,6 +27,16 @@
    <center>
       <VBox alignment="CENTER" prefHeight="415.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="lblFormula" text="Formula">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/structure.png" />
+               </image>
+            </ImageView>
             <Label fx:id="lblName" text="Bond Name">
                <font>
                   <Font size="24.0" />
