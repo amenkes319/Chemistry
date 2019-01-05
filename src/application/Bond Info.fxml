@@ -35,8 +35,7 @@
             <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/structure.png" />
-               </image>
-            </ImageView>
+               </image></ImageView>
             <Label fx:id="lblName" text="Bond Name">
                <font>
                   <Font size="24.0" />

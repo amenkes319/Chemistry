@@ -215,7 +215,8 @@ public class BondTableController
             @Override
             public void changed(ObservableValue<? extends Text> ov, Text t, Text t1)
             {
-                loadBond(Compound.removeSubscript(combo.getSelectionModel().getSelectedItem().getText()));
+            	if(!combo.getSelectionModel().getSelectedItem().getText().equals("No Results!") && !combo.getSelectionModel().getSelectedItem().getText().equals(""))
+            		loadBond(Compound.removeSubscript(combo.getSelectionModel().getSelectedItem().getText()));
             }
         });
 
