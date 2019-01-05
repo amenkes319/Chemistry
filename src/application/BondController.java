@@ -1,19 +1,17 @@
 package application;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -27,6 +25,8 @@ public class BondController
 
 	@FXML
 	private ImageView imgStructure;
+	@FXML
+	private Label lblFormula;
 	@FXML
 	private Label lblName;
 	@FXML
@@ -49,7 +49,6 @@ public class BondController
 			loader.setController(this);
 			stgBond.setScene(new Scene(loader.load()));
 			stgBond.setTitle("Bond");
-			init();
 		}
 		catch(Exception e)
 		{
@@ -57,7 +56,7 @@ public class BondController
 		}
 	}
 
-	public void init()
+	public void initialize()
 	{
 		try
 		{
@@ -68,6 +67,7 @@ public class BondController
 			e.printStackTrace();
 		}
 
+		lblFormula.setText(Compound.removeSubscript(comp.getFormula()));
 		lblName.setText(comp.getName()[0]);
 
 		if(lblName.getText().equals("Hydrogen Fluoride"))
@@ -79,7 +79,11 @@ public class BondController
 
 		File file = new File("src/resources/structure.png");
 		Image image = new Image(file.toURI().toString());
+		Rectangle2D viewportRect = new Rectangle2D(500, 500, 1000, 1000);
+        imgStructure.setViewport(viewportRect);
 		imgStructure.setImage(image);
+
+
 	}
 
 	public void display(int i) throws IOException
