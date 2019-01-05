@@ -147,10 +147,8 @@ public class BondTableController
 				for(int i = 2; !scanSymbol.nextLine().equals(symbol); i++)
 				{
 					num = i;
-					System.out.println(num);
 				}
-
-				element2 = new Element(num);
+				element1 = new Element(num);
 
 				elementCounter++;
 				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
@@ -169,9 +167,7 @@ public class BondTableController
 				for(int i = 2; !scanSymbol.nextLine().equals(symbol); i++)
 				{
 					num = i;
-					System.out.println(num);
 				}
-
 				element2 = new Element(num);
 
 				elementCounter++;

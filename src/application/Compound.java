@@ -3,14 +3,13 @@ package application;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import uk.ac.cam.ch.wwmm.opsin.NameToStructure;
 
 public class Compound
 {
@@ -32,9 +31,6 @@ public class Compound
 		formulaParser(formula);
 		name = searchIUPACName(formula);
 
-		NameToStructure nts = NameToStructure.getInstance();
-		smiles = nts.parseToSmiles(getName());
-
 		findBondPolarity();
 		findBondType();
 		findMoleculeShape();
@@ -47,44 +43,32 @@ public class Compound
 
 		try
 		{
-			doc = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/chemsearch.php")
-			        .data("Search", "Search").data("name", chemicalFormula).data("sel", "f").post();
+			doc = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/compound/" + chemicalFormula.toLowerCase() + ".php").get();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 
-        org.jsoup.select.Elements elements = doc.getElementById("note").getElementsByClass("cmline");
+        org.jsoup.select.Elements elements = doc.getElementsByClass("econtent").get(0).getElementsByClass("cmline");
 
         if (elements.isEmpty())
+        {
             return new String[] { "No results" };
-
-        String[] names = new String[elements.size() - 1];
-
-        for (int i = 1; i < elements.size(); i++)
-        {
-            names[i - 1] = elements.get(i).getElementsByClass("cmname").get(0).getElementsByTag("a").get(0).text();
         }
 
-        for(int i=0; i<names.length; i++)
+
+        ArrayList<String> names = new ArrayList<String>();
+
+        for (int i = 0; i < 2; i++)
         {
-        	try
+        	if(elements.get(i).getElementsByClass("cmleft").text().equals("Name:") || elements.get(i).getElementsByClass("cmleft").text().equals("Alias:"))
         	{
-        		InputStream in = Compound.class.getResourceAsStream("/resources/name.txt");
-				Scanner scanNames = new Scanner(in);
-				while(scanNames.hasNextLine())
-				{
-					if(names[i].equals(scanNames.nextLine()))
-							names[i] = "";
-				}
-				scanNames.close();
-			} catch (Error e) {
-				e.printStackTrace();
-			}
+        		String[] temp = elements.get(i).getElementsByClass("cmright").text().split("; ");
+        		names.addAll(Arrays.asList(temp));
+        	}
         }
-
-        return names;
+        return names.toArray(new String[names.size()]);
     }
 
 	public static ArrayList<String> searchCompounds(Element element1, Element element2)
@@ -281,19 +265,9 @@ public class Compound
 		return element2;
 	}
 
-	public String getSmiles()
+	public String[] getName()
 	{
-		return smiles;
-	}
-
-	public String getName()
-	{
-    	for(int i = 0;i<name.length;i++)
-    	{
-    		if(!name[i].equals(""))
-    			return name[i];
-    	}
-    	return "Not Found";
+		return name;
     }
 
 	public String getBondType()
