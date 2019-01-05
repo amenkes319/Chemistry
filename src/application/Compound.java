@@ -324,7 +324,9 @@ public class Compound
 		Double e2 = element2.getElectronegativity();
 		Double difference = (Math.max(e1, e2) - Math.min(e1,e2));
 
-		if( difference >= 0 && difference <=.3 )
+		if(element1.getSymbol().equals("H") && element2.getSymbol().equals("F"))
+			polarity = "Polar";
+		else if( difference >= 0 && difference <=.3 )
 			polarity = "Nonpolar";
 		else if( difference > .3 && difference <= 1.7)
 			polarity = "Polar";
@@ -336,7 +338,9 @@ public class Compound
 
 	private void findBondType()
 	{
-		if(element1.getType()=="Metal" && element2.getType() == "Metal")
+		if(element1.getSymbol().equals("H") && element2.getSymbol().equals("F"))
+			bondType = "Covalent";
+		else if(element1.getType()=="Metal" && element2.getType() == "Metal")
 			bondType = "Metallic";
 		else if(bondPolarity == "Nonpolar" || bondPolarity == "Polar")
 			bondType = "Covalent";

@@ -52,6 +52,8 @@ public class BondController
 	public void initialize()
 	{
 		lblName.setText(comp.getName()[0]);
+		if(lblName.getText().equals("Hydrogen Fluoride"))
+			lblName.setText("Hydrofluoric Acid");
 		lblType.setText(comp.getBondType());
 		lblPolarity.setText(comp.getBondPolarity());
 		lblMoleculeShape.setText(comp.getMoleculeShape());
@@ -62,14 +64,14 @@ public class BondController
 			org.jsoup.nodes.Document doc = null;
 	    	try
 			{
-	    		System.out.println(comp.getName()[i].replace(" ","%20").trim());
 				doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + comp.getName()[i].replace(" ","%20").trim() + "/record/SDF/?record_type=2d&response_type=display").get();
 			}
 			catch (Exception e)
 			{
-				if(comp.getName()[i+1]!=null)
+				if(comp.getName().length > i+1 && comp.getName()[i+1]!=null)
 				{
 					display(i+1);
+					lblName.setText(lblName.getText() + " / " + comp.getName()[i+1]);
 				}
 				else
 				{
@@ -86,7 +88,6 @@ public class BondController
 	        else
 	        {
 	        	CID = doc.getAllElements().text().split(" ")[0];
-	            System.out.println(CID.split(" ")[0]);
 	            InputStream inputStream = null;
 	            OutputStream outputStream = null;
 
