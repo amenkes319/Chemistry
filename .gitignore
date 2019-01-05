@@ -5,17 +5,14 @@ tmp\
 =======
 bin/
 tmp/
->>>>>>> parent of 37bc46f... Updated .gitignore
 *.tmp
 *.bak
 *.swp
 *~.nib
+*.png
 local.properties
-<<<<<<< HEAD
 .settings\
-=======
 .settings/
->>>>>>> parent of 37bc46f... Updated .gitignore
 .loadpath
 .recommenders
 
