@@ -126,7 +126,7 @@ public class BondController
 	                con.setRequestProperty("User-Agent", USER_AGENT);
 	                inputStream = con.getInputStream();
 	                String path = BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(0, BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().length()-5) + "/src/resources";
-	                outputStream = new FileOutputStream(new java.io.File(path + "/structure.png"));
+			outputStream = new FileOutputStream(new java.io.File(path + "/structure.png", false));
 
 	                byte[] buffer = new byte[2048];
 
