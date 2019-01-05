@@ -67,7 +67,7 @@ public class BondController
 			e.printStackTrace();
 		}
 
-		lblFormula.setText(Compound.removeSubscript(comp.getFormula()));
+		lblFormula.setText(Compound.subscript(comp.getFormula()));
 		lblName.setText(comp.getName()[0]);
 
 		if(lblName.getText().equals("Hydrogen Fluoride"))
