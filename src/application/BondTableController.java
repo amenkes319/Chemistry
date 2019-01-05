@@ -194,7 +194,7 @@ public class BondTableController
 
 	private void loadBond(String formula)
 	{
-		BondController ctrlBond = new BondController(new Compound(formula));
+		BondInfoController ctrlBond = new BondInfoController(new Compound(formula));
 		ctrlBond.showStage();
 		stgBondTable.close();
 	}

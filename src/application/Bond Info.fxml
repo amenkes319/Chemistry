@@ -23,7 +23,7 @@
          </children>
       </HBox>
    </top>
-   <center>
+   <bottom>
       <VBox alignment="CENTER" prefHeight="415.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblName" text="Bond Name">
@@ -46,7 +46,20 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Label fx:id="lblMoleculePolarity" text="Molecule Polarity">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#loadStructure" text="View Structure">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
-   </center>
+   </bottom>
 </BorderPane>

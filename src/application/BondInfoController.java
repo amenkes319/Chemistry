@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class BondController
+public class BondInfoController
 {
 	Stage stgBond;
 	Compound comp;
@@ -26,7 +26,7 @@ public class BondController
 	@FXML
 	private Label lblMoleculeShape;
 
-	public BondController(Compound c)
+	public BondInfoController(Compound c)
 	{
 		stgBond = new Stage();
 		comp = c;
@@ -80,18 +80,18 @@ public class BondController
     		{
     			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=" + CID + "&width=500&height=500").get();
                         org.jsoup.select.Elements img = doc.getElementsByTag("img");
-    			String path = BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(0, BondController.class.getProtectionDomain().getCodeSource().getLocation().getPath().length()-5) + "/src/resources";
+    			String path = BondInfoController.class.getProtectionDomain().getCodeSource().getLocation().getPath().substring(0, BondInfoController.class.getProtectionDomain().getCodeSource().getLocation().getPath().length()-5) + "/src/resources";
     			FileOutputStream out = (new FileOutputStream(new java.io.File(path + "structure.png")));
-                String src = null;        
-    			
+                String src = null;
+
                         for(org.jsoup.nodes.Element el : img)
                         {
                         	src = el.absUrl("src");
                         }
                         URL url = new URL(src);
                         InputStream in = url.openStream();
-                        
-                        for (int b; (b = in.read()) != -1;) 
+
+                        for (int b; (b = in.read()) != -1;)
                         {
                             out.write(b);
                         }
@@ -127,4 +127,9 @@ public class BondController
 		stgBond.close();
 	}
 
+	public void loadStructure()
+	{
+		AlertBox structure = new AlertBox();
+		structure.displayStructure();
+	}
 }

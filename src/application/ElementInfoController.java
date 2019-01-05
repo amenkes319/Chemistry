@@ -61,7 +61,8 @@ public class ElementInfoController {
 		atomicNum = a;
 		stgBack = s;
 		stgElementInfo = new Stage();
-		try {
+		try 
+		{
 			stgElementInfo.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Element Info.fxml"));
 
