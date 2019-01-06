@@ -9,9 +9,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -78,12 +78,11 @@ public class BondController
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 
 		File file = new File("bin/resources/structure.png");
-		Image image = new Image(file.toURI().toString());
-		Rectangle2D viewportRect = new Rectangle2D(50, 50, 100, 100);
-        imgStructure.setViewport(viewportRect);
-		imgStructure.setImage(image);
-
-
+		//Image image = new Image(file.toURI().toString());
+	    
+		Platform.runLater( () -> { Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
+		
+		//imgStructure.setImage(image);
 	}
 
 	public String findCID() throws IOException
