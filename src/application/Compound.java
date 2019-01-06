@@ -37,38 +37,38 @@ public class Compound
 		findMoleculePolarity();
 	}
 
-	public String[] searchIUPACName(String chemicalFormula)
+	public static String[] searchIUPACName(String chemicalFormula)
     {
-        org.jsoup.nodes.Document doc = null;
+	        org.jsoup.nodes.Document doc = null;
 
-		try
-		{
-			doc = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/compound/" + chemicalFormula.toLowerCase() + ".php").get();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+			try
+			{
+				doc = org.jsoup.Jsoup.connect("http://www.endmemo.com/chem/compound/" + chemicalFormula.toLowerCase() + ".php").get();
+			}
+			catch (IOException e)
+			{
+				return new String[]{"No Results!"};
+			}
 
-        org.jsoup.select.Elements elements = doc.getElementsByClass("econtent").get(0).getElementsByClass("cmline");
+	        org.jsoup.select.Elements elements = doc.getElementsByClass("econtent").get(0).getElementsByClass("cmline");
 
-        if (elements.isEmpty())
-        {
-            return new String[] { "No results" };
-        }
+	        if (elements.isEmpty())
+	        {
+	            return new String[] { "No results" };
+	        }
 
 
-        ArrayList<String> names = new ArrayList<String>();
+	        ArrayList<String> names = new ArrayList<String>();
 
-        for (int i = 0; i < 2; i++)
-        {
-        	if(elements.get(i).getElementsByClass("cmleft").text().equals("Name:") || elements.get(i).getElementsByClass("cmleft").text().equals("Alias:"))
-        	{
-        		String[] temp = elements.get(i).getElementsByClass("cmright").text().split("; ");
-        		names.addAll(Arrays.asList(temp));
-        	}
-        }
-        return names.toArray(new String[names.size()]);
+	        for (int i = 0; i < 2; i++)
+	        {
+	        	if(elements.get(i).getElementsByClass("cmleft").text().equals("Name:") || elements.get(i).getElementsByClass("cmleft").text().equals("Alias:"))
+	        	{
+	        		String[] temp = elements.get(i).getElementsByClass("cmright").text().split("; ");
+	        		names.addAll(Arrays.asList(temp));
+	        	}
+	        }
+	        return names.toArray(new String[names.size()]);
     }
 
 	public static ArrayList<String> searchCompounds(Element element1, Element element2)
