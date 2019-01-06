@@ -155,7 +155,7 @@ public class BondController
 		}
 		catch (Exception ex)
 		{
-		Logger.getLogger("Compound Image Not Available");
+			Logger.getLogger("Compound Image Not Available");
 		}
 	}
 
