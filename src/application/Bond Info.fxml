@@ -32,10 +32,13 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/structure.png" />
-               </image></ImageView>
+               </image>
+               <viewport>
+                  <Rectangle2D height="100.0" minX="200.0" minY="200.0" width="100.0" />
+               </viewport></ImageView>
             <Label fx:id="lblName" text="Bond Name">
                <font>
                   <Font size="24.0" />
