@@ -37,7 +37,7 @@
                   <Image url="@../resources/structure.png" />
                </image>
                <viewport>
-                  <Rectangle2D height="100.0" minX="200.0" minY="200.0" width="100.0" />
+                  <Rectangle2D height="160.0" minX="170.0" minY="170.0" width="160.0" />
                </viewport></ImageView>
             <Label fx:id="lblName" text="Bond Name">
                <font>
