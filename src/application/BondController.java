@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -78,52 +79,52 @@ public class BondController
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 
 		File file = new File("bin/resources/structure.png");
+
 		//Image image = new Image(file.toURI().toString());
-	    
+
 		Platform.runLater( () -> { Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
-		
+
 		//imgStructure.setImage(image);
 	}
 
 	public String findCID() throws IOException
 	{
-			org.jsoup.nodes.Document doc = null;
+		org.jsoup.nodes.Document doc = null;
+    	try
+		{
+			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + comp.getName()[0].replace(" ","%20").trim() + "/record/SDF/?record_type=2d&response_type=display").get();
+		}
+		catch (Exception e)
+		{
+	    	org.jsoup.nodes.Document doc1 = null;
 	    	try
 			{
-				doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + comp.getName()[0].replace(" ","%20").trim() + "/record/SDF/?record_type=2d&response_type=display").get();
-			}
-			catch (Exception e)
-			{
-		    	org.jsoup.nodes.Document doc1 = null;
-		    	try
+				doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + "BH3" + "/txt").get();
+				String listkey = doc1.getAllElements().text().split("Your request is running ListKey: ")[1].trim();
+				try
 				{
-					doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + "BH3" + "/txt").get();
-					String listkey = doc1.getAllElements().text().split("Your request is running ListKey: ")[1].trim();
-					try
-					{
-						doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").get();
-
+					doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").get();
 						return doc1.getAllElements().text().split(" ")[0];
-					}
-					catch(Exception e2)
-					{
-						e.printStackTrace();
-					}
 				}
-				catch(Exception e1)
+				catch(Exception e2)
 				{
-					e1.printStackTrace();
+					e.printStackTrace();
 				}
 			}
+			catch(Exception e1)
+			{
+				e1.printStackTrace();
+			}
+		}
 
-	        if (doc == null)
-	        {
-	            return "No results";
-	        }
-	        else
-	        {
-	        	return doc.getAllElements().text().split(" ")[0];
-	        }
+        if (doc == null)
+        {
+            return "No results";
+        }
+        else
+        {
+        	return doc.getAllElements().text().split(" ")[0];
+        }
 	}
 
 	public void display(String CID)
