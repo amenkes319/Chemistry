@@ -78,11 +78,7 @@ public class BondController
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 
 		File file = new File("bin/resources/structure.png");
-		//Image image = new Image(file.toURI().toString());
-
 		Platform.runLater( () -> { Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
-
-		//imgStructure.setImage(image);
 	}
 
 	public String findCID() throws IOException
