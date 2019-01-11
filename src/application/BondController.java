@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Logger;
-import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
