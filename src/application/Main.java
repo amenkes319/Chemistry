@@ -1,10 +1,5 @@
 package application;
 
-import java.io.IOException;
-import java.util.Arrays;
-
-import org.jsoup.select.Elements;
-
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
