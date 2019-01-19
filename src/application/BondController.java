@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -58,14 +60,7 @@ public class BondController
 
 	public void initialize()
 	{
-		try
-		{
-			display(findCID());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		display(findCID());
 
 		lblFormula.setText(Compound.subscript(comp.getFormula()));
 		lblName.setText(comp.getName()[0]);
@@ -77,48 +72,45 @@ public class BondController
 		lblPolarity.setText(comp.getBondPolarity());
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 
-		File file = new File("bin/resources/structure.png");
-		Platform.runLater( () -> { Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
+		Platform.runLater( () -> { File file = new File("bin/resources/structure.png"); Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
 	}
 
-	public String findCID() throws IOException
+	public String findCID()
 	{
-		org.jsoup.nodes.Document doc = null;
-    	try
+		org.jsoup.nodes.Document doc = null, doc1 = null,doc2 = null;
+
+		try
 		{
-			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + comp.getName()[0].replace(" ","%20").trim() + "/record/SDF/?record_type=2d&response_type=display").get();
+			String url = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + comp.getName()[0].replace(" ","%20").trim() + "/record/SDF/?record_type=2d&response_type=display";
+			doc = org.jsoup.Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").timeout(0).get();
+			return doc.getAllElements().text().split(" ")[0];
 		}
 		catch (Exception e)
 		{
-	    	org.jsoup.nodes.Document doc1 = null;
 	    	try
 			{
-				doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + "BH3" + "/txt").get();
+				doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + comp.getFormula() + "/txt").userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").timeout(3000).get();
 				String listkey = doc1.getAllElements().text().split("Your request is running ListKey: ")[1].trim();
+				TimeUnit.SECONDS.sleep(4);
 				try
 				{
-					doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").get();
-						return doc1.getAllElements().text().split(" ")[0];
+					doc2 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").referrer("http://www.google.com").timeout(0).get();
+					String[] arr = doc2.getAllElements().text().split("\\s+");
+					return String.valueOf(sorting(arr)[0]);
 				}
-				catch(Exception e2)
+				catch (IOException e3)
 				{
-					e.printStackTrace();
+					System.out.println("broke");
+					e3.printStackTrace();
 				}
+				return "No Results!";
 			}
 			catch(Exception e1)
 			{
 				e1.printStackTrace();
 			}
 		}
-
-        if (doc == null)
-        {
-            return "No results";
-        }
-        else
-        {
-        	return doc.getAllElements().text().split(" ")[0];
-        }
+		return "No Results!";
 	}
 
 	public void display(String CID)
@@ -151,6 +143,21 @@ public class BondController
 		{
 			Logger.getLogger("Compound Image Not Available");
 		}
+	}
+
+	public int[] sorting(String[] arr)
+	{
+		String[] temp = arr.clone();
+		int[] temp1 = new int[temp.length];
+		for(int i = 0; i < arr.length; i++)
+		{
+			if(temp[i].matches("-?\\d+"))
+			{
+				temp1[i] = Integer.parseInt(temp[i].trim());
+			}
+		}
+		Arrays.sort(temp1);
+		return temp1;
 	}
 
 	public void showStage()
