@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -71,12 +72,7 @@ public class BondController
 		lblPolarity.setText(comp.getBondPolarity());
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 
-		//File file = new File("bin/resources/structure.png");
-		//Image image = new Image(file.toURI().toString());
-
 		Platform.runLater( () -> { File file = new File("bin/resources/structure.png"); Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
-
-		//imgStructure.setImage(image);
 	}
 
 	public String findCID()
@@ -86,29 +82,28 @@ public class BondController
 		try
 		{
 			String url = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + comp.getName()[0].replace(" ","%20").trim() + "/record/SDF/?record_type=2d&response_type=display";
-			doc = org.jsoup.Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").post();
-			if(doc.equals(null))
-			{
-				try
-				{
-					doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + comp.getFormula() + "/txt").timeout(0).get();
-					String listkey = doc1.getAllElements().text().split("Your request is running ListKey: ")[1].trim();
-					return listKey(listkey);
-				}
-				catch(Exception e1)
-				{
-					e1.printStackTrace();
-				}
-			}
+			doc = org.jsoup.Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").timeout(0).get();
 			return doc.getAllElements().text().split(" ")[0];
 		}
 		catch (Exception e)
 		{
 	    	try
 			{
-				doc2 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + comp.getFormula() + "/txt").userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").get();
-				String listkey = doc2.getAllElements().text().split("Your request is running ListKey: ")[1].trim();
-				return listKey(listkey);
+				doc1 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/formula/" + comp.getFormula() + "/txt").userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").timeout(3000).get();
+				String listkey = doc1.getAllElements().text().split("Your request is running ListKey: ")[1].trim();
+				TimeUnit.SECONDS.sleep(4);
+				try
+				{
+					doc2 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").referrer("http://www.google.com").timeout(0).get();
+					String[] arr = doc2.getAllElements().text().split("\\s+");
+					return String.valueOf(sorting(arr)[0]);
+				}
+				catch (IOException e3)
+				{
+					System.out.println("broke");
+					e3.printStackTrace();
+				}
+				return "No Results!";
 			}
 			catch(Exception e1)
 			{
@@ -120,29 +115,30 @@ public class BondController
 
 	public String listKey(String listkey)
 	{
-		org.jsoup.nodes.Document doc3 = null;
-		System.out.println("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt");
+		org.jsoup.nodes.Document doc = null;
 		try
 		{
-			doc3 = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").timeout(0).get();
+			doc = org.jsoup.Jsoup.connect("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/listkey/" + listkey + "/cids/txt").userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").timeout(0).get();
+
+			String[] arr = doc.getAllElements().text().split(" ");
+
+			int[] cids = new int[arr.length];
+
+			for(int i = 0; i < arr.length; i++)
+			{
+				System.out.println(arr[i]);
+				cids[i] = Integer.parseInt(arr[i]);
+			}
+
+			Arrays.sort(cids);
+			System.out.println(String.valueOf(cids[0]));
+			return String.valueOf(cids[0]);
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		org.jsoup.select.Elements elements = doc3.getAllElements();
-
-		int[] cids = new int[elements.text().split(" ").length];
-
-		for(int i = 0; i < elements.text().split(" ").length; i++)
-		{
-			System.out.println(elements.text().split(" ")[i]);
-			//cids[i] = Integer.parseInt(doc2.getAllElements().text().split(" ")[i]);
-		}
-
-		Arrays.sort(cids);
-		System.out.println(String.valueOf(cids[0]));
-		return String.valueOf(cids[0]);
+		return "No Results!";
 	}
 
 	public void display(String CID)
@@ -175,6 +171,21 @@ public class BondController
 		{
 			Logger.getLogger("Compound Image Not Available");
 		}
+	}
+
+	public int[] sorting(String[] arr)
+	{
+		String[] temp = arr.clone();
+		int[] temp1 = new int[temp.length];
+		for(int i = 0; i < arr.length; i++)
+		{
+			if(temp[i].matches("-?\\d+"))
+			{
+				temp1[i] = Integer.parseInt(temp[i].trim());
+			}
+		}
+		Arrays.sort(temp1);
+		return temp1;
 	}
 
 	public void showStage()
