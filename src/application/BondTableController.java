@@ -79,7 +79,6 @@ public class BondTableController
 		BondTableController ctrlBondTable = new BondTableController();
 		ctrlBondTable.showStage();
 		stgBondTable.close();
-
 	}
 
 	public void isPressed(ActionEvent event)
@@ -208,11 +207,11 @@ public class BondTableController
 			{
 				combo.getItems().add(compound);
 			}
-			if(IUPACName(compound.getText())[0].equals("No Results!"))
+			if(IUPACName(Compound.removeSubscript(compound.getText()))[0].equals("No Results!"))
 			{
-				Text compound1 = new Text("No Results!");
-				compound1.setFont(new Font(25));
-				combo.getItems().set(i, compound1);
+				Text none = new Text("No Results!");
+				none.setFont(new Font(25));
+				combo.getItems().set(i, none);
 			}
 		}
 
