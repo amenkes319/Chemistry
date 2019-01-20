@@ -1,13 +1,14 @@
 package application;
 
+import java.io.InputStream;
 import java.util.Scanner;
-import java.io.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class SearchController
@@ -32,6 +33,7 @@ public class SearchController
 	public SearchController()
 	{
 		stgSearch = new Stage();
+		stgSearch.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 		try
 		{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
@@ -45,11 +47,13 @@ public class SearchController
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showStage()
+
 	{
 		stgSearch.show();
 	}
+
 	public void loadBack()
 	{
 		MainMenuController ctrlMenu = new MainMenuController();
@@ -59,7 +63,7 @@ public class SearchController
 
 	public void loadElementInfo()
 	{
-		ElementInfoController ctrlElementInfo = new ElementInfoController(atomicNum);
+		ElementInfoController ctrlElementInfo = new ElementInfoController(atomicNum, stgSearch);
 		ctrlElementInfo.showStage();
 		stgSearch.close();
 	}
@@ -69,8 +73,15 @@ public class SearchController
 		try
 		{
 			atomicNum = Integer.parseInt(txtFldSearchNum.getText());
-			loadElementInfo();
-			stgSearch.close();
+
+			if(atomicNum < 1 || atomicNum > 57 && atomicNum < 72 || atomicNum > 89)
+				AlertBox.displayElementNotFound();
+			else
+			{
+				loadElementInfo();
+				stgSearch.close();
+			}
+
 		}
 		catch(NumberFormatException e)
 		{
@@ -90,15 +101,21 @@ public class SearchController
 
 	public void nameToAtomicNum() throws Exception
 	{
-		Scanner scanName = new Scanner(new File("src\\application\\name.txt"));
+		InputStream in = SearchController.class.getResourceAsStream("/resources/name.txt");
+		Scanner scanName = new Scanner(in);
 		for(int i=1; scanName.hasNextLine(); i++)
 		{
-			if(getAtomName().equals(scanName.next()))
+			if(getAtomName().trim().equalsIgnoreCase(scanName.next()))
 			{
 				scanName.close();
 				atomicNum =  i;
-				loadElementInfo();
-				return;
+				if(atomicNum < 1 || atomicNum > 57 && atomicNum < 72 || atomicNum > 89)
+					AlertBox.displayElementNotFound();
+				else
+				{
+					loadElementInfo();
+					return;
+				}
 			}
 		}
 		scanName.close();
@@ -107,15 +124,22 @@ public class SearchController
 
 	public void symbolToAtomicNum() throws Exception
 	{
-		Scanner scanSymbol= new Scanner(new File("src\\application\\symbol.txt"));
+		InputStream in = SearchController.class.getResourceAsStream("/resources/symbol.txt");
+		Scanner scanSymbol = new Scanner(in);
 		for(int i=1; scanSymbol.hasNextLine(); i++)
 		{
-			if(getAtomicSymbol().equals(scanSymbol.next()))
+			if(getAtomicSymbol().trim().equals(scanSymbol.next()))
 			{
 				scanSymbol.close();
 				atomicNum =  i;
-				loadElementInfo();
-				return;
+
+				if(atomicNum < 1 || atomicNum > 57 && atomicNum < 72 || atomicNum > 89)
+					AlertBox.displayElementNotFound();
+				else
+				{
+					loadElementInfo();
+					return;
+				}
 			}
 		}
 		scanSymbol.close();

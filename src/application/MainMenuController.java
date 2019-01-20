@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 
 public class MainMenuController
 {
@@ -14,13 +15,12 @@ public class MainMenuController
 	@FXML
 	private Button btnOpenPT;
 	@FXML
-	private Button btnOpenCompare;
-	@FXML
 	private Button btnOpenBond;
 
 	public MainMenuController()
 	{
 		stgMainMenu = new Stage();
+		stgMainMenu.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 		try
 		{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Main Menu.fxml"));
@@ -54,16 +54,9 @@ public class MainMenuController
 		stgMainMenu.close();
 	}
 
-	public void loadCompare()
-	{
-		CompareController ctrlCompare = new CompareController();
-		ctrlCompare.showStage();
-		stgMainMenu.close();
-	}
-
 	public void loadBond()
 	{
-		BondController ctrlBond = new BondController();
+		BondTableController ctrlBond = new BondTableController();
 		ctrlBond.showStage();
 		stgMainMenu.close();
 	}

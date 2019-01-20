@@ -1,67 +1,139 @@
 package application;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
+import java.text.DecimalFormat;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class ElementInfoController
-{
+public class ElementInfoController {
 	Stage stgElementInfo;
+	Stage stgBack;
 	int atomicNum;
-	@FXML
-	private Button btnBack;
+
 	@FXML
 	private Button btnMenu;
-	@FXML
-	private Label lblInfo[] = new Label[18];
 
-	public ElementInfoController(int a)
-	{
+	@FXML
+	private Label lblName = new Label();
+	@FXML
+	private Label lblSymbol = new Label();
+	@FXML
+	private Label lblAtomicNum = new Label();
+	@FXML
+	private Label lblAtomicMass = new Label();
+	@FXML
+	private Label lblNeutrons = new Label();
+	@FXML
+	private Label lblGroup = new Label();
+	@FXML
+	private Label lblPeriod = new Label();
+	@FXML
+	private Label lblDiatomic = new Label();
+	@FXML
+	private Label lblIE = new Label();
+	@FXML
+	private Label lblEN = new Label();
+	@FXML
+	private Label lblMeltingPt = new Label();
+	@FXML
+	private Label lblBoilingPt = new Label();
+	@FXML
+	private Label lblDensity = new Label();
+	@FXML
+	private Label lblDensitySuper = new Label();
+	@FXML
+	private Label lblRadius = new Label();
+	@FXML
+	private Label lblEConfig = new Label();
+	@FXML
+	private Label lblPhase = new Label();
+	@FXML
+	private Label lblType = new Label();
+	@FXML
+	private Label lblOxidState = new Label();
+
+	public ElementInfoController(int a, Stage s) {
 		atomicNum = a;
+		stgBack = s;
 		stgElementInfo = new Stage();
-		try
-		{
+		try {
+			stgElementInfo.getIcons().add(new Image(this.getClass().getResourceAsStream("icon.png")));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Element Info.fxml"));
+
 			loader.setController(this);
+
 			stgElementInfo.setScene(new Scene(loader.load()));
 			stgElementInfo.setTitle("Element Info");
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		initialize();
 	}
 
-	private void initialize()
+	public void initialize()
 	{
-		for(int i=0; i<lblInfo.length; i++)
+		Element element = new Element(atomicNum);
+		DecimalFormat df = new DecimalFormat("#.######");
+
+		lblName.setText(element.getName());
+		lblSymbol.setText("Element Symbol: " + element.getSymbol());
+		lblAtomicNum.setText("Atomic Number: " + atomicNum);
+		lblAtomicMass.setText("Atomic Mass: " + element.getAtomicMass());
+		lblNeutrons.setText("Number of Neutrons: " + element.getNeutrons());
+		lblGroup.setText("Group: " + element.getGroup());
+		lblPeriod.setText("Period: " + element.getPeriod());
+		lblDiatomic.setText(element.getDiatomic());
+
+		if(element.getIonizationEnergy() == 0)
+			lblEN.setText("Ionization Energy: N/A");
+		else
+			lblIE.setText("Ionization Energy: " + element.getIonizationEnergy() + "kJ/mol");
+
+
+		if(element.getElectronegativity() == 0)
+			lblEN.setText("Electronegativity: N/A");
+		else
+			lblEN.setText("Electronegativity: " + element.getElectronegativity());
+
+		if(element.getMeltingPoint() == 0)
+			lblMeltingPt.setText("Melting Point: N/A");
+		else
+			lblMeltingPt.setText("Melting Point: " + element.getMeltingPoint() + "K");
+
+		if(element.getBoilingPoint() == 0)
+			lblBoilingPt.setText("Boiling Point: N/A");
+		else
+			lblBoilingPt.setText("Boiling Point: " + element.getBoilingPoint() + "K");
+
+		if(element.getDensity() == 0)
 		{
-
+			lblDensity.setText("Density: N/A");
+			lblDensitySuper.setVisible(false);
 		}
+		else
+			lblDensity.setText("Density: " + df.format(element.getDensity()) + "g/cm");
+
+		lblRadius.setText("Atomic Radius: " + element.getAtomicRadius() + "pm");
+		lblEConfig.setText("Electron Configuration: " + element.getEConfig());
+		lblPhase.setText("Phase at STP: " + element.getPhase());
+		lblType.setText("Type: " + element.getType());
+		lblOxidState.setText("Oxidation State(s): " + element.getOxidationState());
 	}
 
-	public void showStage()
-	{
+	public void showStage() {
 		stgElementInfo.show();
 	}
 
-	public void loadBack()
-	{
-		SearchController ctrlSearch = new SearchController();
-		ctrlSearch.showStage();
+	public void loadBack() {
 		stgElementInfo.close();
+		stgBack.show();
 	}
 
-	public void loadMenu()
-	{
+	public void loadMenu() {
 		MainMenuController ctrlMenu = new MainMenuController();
 		ctrlMenu.showStage();
 		stgElementInfo.close();
