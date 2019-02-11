@@ -159,6 +159,11 @@ public class Compound
 	    return str;
 	}
 
+	public int findGFM()
+	{
+		return (int)Math.round(element1.getAtomicMass()*quantity1 + element2.getAtomicMass()*quantity2);
+	}
+
 	public void formulaParser(String formula)
 	{
 		cformula = formula;
@@ -326,9 +331,9 @@ public class Compound
 
 		if(element1.getSymbol().equals("H") && element2.getSymbol().equals("F"))
 			polarity = "Polar";
-		else if( difference >= 0 && difference <=.3 )
+		else if( difference >= 0 && difference <=.4 )
 			polarity = "Nonpolar";
-		else if( difference > .3 && difference <= 1.7)
+		else if( difference > .4 && difference <= 1.7)
 			polarity = "Polar";
 		else if(difference > 1.7)
 			polarity = "Ionic";
@@ -355,8 +360,7 @@ public class Compound
 
 	private void findMoleculePolarity()
 	{
-
-		if(getMoleculeShape().equalsIgnoreCase("Linear") || getMoleculeShape().equalsIgnoreCase("Planar") ||
+		if(!bondType.equals("Ionic") && getMoleculeShape().equalsIgnoreCase("Linear") || getMoleculeShape().equalsIgnoreCase("Planar") ||
 		   getMoleculeShape().equalsIgnoreCase("Tetrahedral") || getMoleculeShape().equalsIgnoreCase("Octahedral") ||
 		   getMoleculeShape().equalsIgnoreCase("Square Planar"))
 			moleculePolarity = "Nonpolar";
