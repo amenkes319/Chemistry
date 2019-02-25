@@ -72,7 +72,12 @@ public class BondController
 		lblPolarity.setText(comp.getBondPolarity());
 		lblMoleculeShape.setText(comp.getMoleculeShape());
 
-		Platform.runLater( () -> { File file = new File("bin/resources/structure.png"); Image image = new Image(file.toURI().toString()); imgStructure.setImage(image); } );
+		Platform.runLater( () ->
+		{
+			File file = new File("bin/resources/structure.png");
+			Image image = new Image(file.toURI().toString());
+			imgStructure.setImage(image);
+		});
 	}
 
 	public String findCID()
