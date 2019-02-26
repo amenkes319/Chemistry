@@ -33,8 +33,6 @@ public class Compound
 
 		findBondPolarity();
 		findBondType();
-		findMoleculeShape();
-		findMoleculePolarity();
 	}
 
 	public static String[] searchIUPACName(String chemicalFormula)
@@ -159,9 +157,9 @@ public class Compound
 	    return str;
 	}
 
-	public int findGFM()
+	public double findGFM()
 	{
-		return (int)Math.round(element1.getAtomicMass()*quantity1 + element2.getAtomicMass()*quantity2);
+		return element1.getAtomicMass()*quantity1 + element2.getAtomicMass()*quantity2;
 	}
 
 	public void formulaParser(String formula)
@@ -170,22 +168,30 @@ public class Compound
 
         final Stack<Map<String, Integer>> stack = new Stack<>();
         stack.push(new LinkedHashMap<>());
+
         final Pattern pattern = Pattern.compile("([A-Z][a-z]*)(\\d*)|(\\()|(\\))(\\d*)");
         final Matcher matcher = pattern.matcher(formula);
 
-        while (matcher.find()) {
+        while (matcher.find())
+        {
             final String match = matcher.group();
             if (match.equals("(")) {
                 stack.push(new LinkedHashMap<>());
-            } else if (match.startsWith(")")) {
+            }
+            else if (match.startsWith(")"))
+            {
                 final Map<String, Integer> top = stack.pop();
                 final int multiple = match.length() > 1 ? Integer.parseInt(match.substring(1, match.length())) : 1;
-                for (final String name : top.keySet()) {
+                for (final String name : top.keySet())
+                {
                     stack.peek().put(name, stack.peek().getOrDefault(name, 0) + top.get(name) * multiple);
                 }
-            } else {
+            }
+            else
+            {
                 int i = 1;
-                while (i < match.length() && Character.isLowerCase(match.charAt(i))) {
+                while (i < match.length() && Character.isLowerCase(match.charAt(i)))
+                {
                     i++;
                 }
                 final String name = match.substring(0, i);
@@ -295,6 +301,11 @@ public class Compound
 		return moleculePolarity;
 	}
 
+	public double getGFM()
+	{
+		return findGFM();
+	}
+
 	public void setQuantity1(int num)
 	{
 		quantity1 = num;
@@ -351,20 +362,5 @@ public class Compound
 			bondType = "Covalent";
 		else if(bondPolarity == "Ionic")
 			bondType = "Ionic";
-	}
-
-	private void findMoleculeShape()
-	{
-		moleculeShape = "Shape";
-	}
-
-	private void findMoleculePolarity()
-	{
-		if(!bondType.equals("Ionic") && getMoleculeShape().equalsIgnoreCase("Linear") || getMoleculeShape().equalsIgnoreCase("Planar") ||
-		   getMoleculeShape().equalsIgnoreCase("Tetrahedral") || getMoleculeShape().equalsIgnoreCase("Octahedral") ||
-		   getMoleculeShape().equalsIgnoreCase("Square Planar"))
-			moleculePolarity = "Nonpolar";
-		else
-			moleculePolarity = "Polar";
 	}
 }

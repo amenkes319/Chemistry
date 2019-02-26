@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #87ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="paneLoadLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #37ceeb;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,7 +37,7 @@
                   <Image url="@../resources/structure.png" />
                </image>
                <viewport>
-                  <Rectangle2D height="160.0" minX="170.0" minY="170.0" width="160.0" />
+                  <Rectangle2D height="180.0" minX="150.0" minY="150.0" width="180.0" />
                </viewport></ImageView>
             <Label fx:id="lblName" text="Bond Name">
                <font>
@@ -49,12 +49,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblPolarity" text="Bond Polarity">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblMoleculeShape" text="Molecule Shape">
+            <Label fx:id="lblGFM" text="GFM">
                <font>
                   <Font size="24.0" />
                </font>

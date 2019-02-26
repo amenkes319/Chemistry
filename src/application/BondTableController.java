@@ -155,6 +155,7 @@ public class BondTableController
 			}
 			else if(elementCounter == 1)
 			{
+				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
 				button.setToggleGroup(two);
 				second = button.getText();
 				style2 = button.getStyle();
@@ -168,9 +169,8 @@ public class BondTableController
 					num = i;
 				}
 				element2 = new Element(num);
-
+				
 				elementCounter++;
-				button.setStyle("-fx-border-color: black; -fx-border-width: 1.5px; -fx-background-color: white");
 				scanSymbol.close();
 			}
 

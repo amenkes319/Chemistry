@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -25,18 +26,8 @@ public class BondController
 	Stage stgBond;
 	Compound comp;
 
-	@FXML
-	private ImageView imgStructure;
-	@FXML
-	private Label lblFormula;
-	@FXML
-	private Label lblName;
-	@FXML
-	private Label lblType;
-	@FXML
-	private Label lblPolarity;
-	@FXML
-	private Label lblMoleculeShape;
+	@FXML private ImageView imgStructure;
+	@FXML private Label lblFormula, lblName, lblType, lblGFM;
 
 	public BondController(Compound c)
 	{
@@ -61,6 +52,7 @@ public class BondController
 	public void initialize()
 	{
 		display(findCID());
+		DecimalFormat hundredths = new DecimalFormat("#.##");
 
 		lblFormula.setText(Compound.subscript(comp.getFormula()));
 		lblName.setText(comp.getName()[0]);
@@ -68,9 +60,8 @@ public class BondController
 		if(lblName.getText().equals("Hydrogen Fluoride"))
 			lblName.setText("Hydrofluoric Acid");
 
-		lblType.setText(comp.getBondType());
-		lblPolarity.setText(comp.getBondPolarity());
-		lblMoleculeShape.setText(comp.getMoleculeShape());
+		lblType.setText(comp.getBondType() + " Bond");
+		lblGFM.setText(hundredths.format(comp.getGFM()) + "g/mol");
 
 		Platform.runLater( () ->
 		{
