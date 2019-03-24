@@ -60,7 +60,7 @@ public class BondController
 		if(lblName.getText().equals("Hydrogen Fluoride"))
 			lblName.setText("Hydrofluoric Acid");
 
-		lblType.setText(comp.getBondType() + " Bond");
+		lblType.setText(comp.getBondPolarity() + " " + comp.getBondType() + " Bond");
 		lblGFM.setText(hundredths.format(comp.getGFM()) + "g/mol");
 
 		Platform.runLater( () ->

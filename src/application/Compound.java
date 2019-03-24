@@ -346,8 +346,8 @@ public class Compound
 			polarity = "Nonpolar";
 		else if( difference > .4 && difference <= 1.7)
 			polarity = "Polar";
-		else if(difference > 1.7)
-			polarity = "Ionic";
+		else
+			polarity = "";
 
 		bondPolarity = polarity;
 	}
@@ -356,11 +356,16 @@ public class Compound
 	{
 		if(element1.getSymbol().equals("H") && element2.getSymbol().equals("F"))
 			bondType = "Covalent";
+		else if((element1.getGroup() == 1 || element1.getGroup() == 2) && element2.getSymbol().equals("H"))
+		{
+			bondType = "Ionic";
+			bondPolarity = "";
+		}
 		else if(element1.getType()=="Metal" && element2.getType() == "Metal")
 			bondType = "Metallic";
 		else if(bondPolarity == "Nonpolar" || bondPolarity == "Polar")
 			bondType = "Covalent";
-		else if(bondPolarity == "Ionic")
+		else if(bondPolarity == "")
 			bondType = "Ionic";
 	}
 }
