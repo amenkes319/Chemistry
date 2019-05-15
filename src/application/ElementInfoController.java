@@ -18,44 +18,25 @@ public class ElementInfoController {
 	@FXML
 	private Button btnMenu;
 
-	@FXML
-	private Label lblName = new Label();
-	@FXML
-	private Label lblSymbol = new Label();
-	@FXML
-	private Label lblAtomicNum = new Label();
-	@FXML
-	private Label lblAtomicMass = new Label();
-	@FXML
-	private Label lblNeutrons = new Label();
-	@FXML
-	private Label lblGroup = new Label();
-	@FXML
-	private Label lblPeriod = new Label();
-	@FXML
-	private Label lblDiatomic = new Label();
-	@FXML
-	private Label lblIE = new Label();
-	@FXML
-	private Label lblEN = new Label();
-	@FXML
-	private Label lblMeltingPt = new Label();
-	@FXML
-	private Label lblBoilingPt = new Label();
-	@FXML
-	private Label lblDensity = new Label();
-	@FXML
-	private Label lblDensitySuper = new Label();
-	@FXML
-	private Label lblRadius = new Label();
-	@FXML
-	private Label lblEConfig = new Label();
-	@FXML
-	private Label lblPhase = new Label();
-	@FXML
-	private Label lblType = new Label();
-	@FXML
-	private Label lblOxidState = new Label();
+	@FXML private Label lblName = new Label();
+	@FXML private Label lblSymbol = new Label();
+	@FXML private Label lblAtomicNum = new Label();
+	@FXML private Label lblAtomicMass = new Label();
+	@FXML private Label lblNeutrons = new Label();
+	@FXML private Label lblGroup = new Label();
+	@FXML private Label lblPeriod = new Label();
+	@FXML private Label lblDiatomic = new Label();
+	@FXML private Label lblIE = new Label();
+	@FXML private Label lblEN = new Label();
+	@FXML private Label lblMeltingPt = new Label();
+	@FXML private Label lblBoilingPt = new Label();
+	@FXML private Label lblDensity = new Label();
+	@FXML private Label lblDensitySuper = new Label();
+	@FXML private Label lblRadius = new Label();
+	@FXML private Label lblEConfig = new Label();
+	@FXML private Label lblPhase = new Label();
+	@FXML private Label lblType = new Label();
+	@FXML private Label lblOxidState = new Label();
 
 	public ElementInfoController(int a, Stage s) {
 		atomicNum = a;
