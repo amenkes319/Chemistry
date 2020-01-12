@@ -38,7 +38,8 @@ public class ElementInfoController {
 	@FXML private Label lblType = new Label();
 	@FXML private Label lblOxidState = new Label();
 
-	public ElementInfoController(int a, Stage s) {
+	public ElementInfoController(int a, Stage s)
+	{
 		atomicNum = a;
 		stgBack = s;
 		stgElementInfo = new Stage();
@@ -69,28 +70,28 @@ public class ElementInfoController {
 		lblPeriod.setText("Period: " + element.getPeriod());
 		lblDiatomic.setText(element.getDiatomic());
 
-		if(element.getIonizationEnergy() == 0)
+		if (element.getIonizationEnergy() == 0)
 			lblEN.setText("Ionization Energy: N/A");
 		else
 			lblIE.setText("Ionization Energy: " + element.getIonizationEnergy() + "kJ/mol");
 
 
-		if(element.getElectronegativity() == 0)
+		if (element.getElectronegativity() == 0)
 			lblEN.setText("Electronegativity: N/A");
 		else
 			lblEN.setText("Electronegativity: " + element.getElectronegativity());
 
-		if(element.getMeltingPoint() == 0)
+		if (element.getMeltingPoint() == 0)
 			lblMeltingPt.setText("Melting Point: N/A");
 		else
 			lblMeltingPt.setText("Melting Point: " + element.getMeltingPoint() + "K");
 
-		if(element.getBoilingPoint() == 0)
+		if (element.getBoilingPoint() == 0)
 			lblBoilingPt.setText("Boiling Point: N/A");
 		else
 			lblBoilingPt.setText("Boiling Point: " + element.getBoilingPoint() + "K");
 
-		if(element.getDensity() == 0)
+		if (element.getDensity() == 0)
 		{
 			lblDensity.setText("Density: N/A");
 			lblDensitySuper.setVisible(false);
@@ -105,16 +106,19 @@ public class ElementInfoController {
 		lblOxidState.setText("Oxidation State(s): " + element.getOxidationState());
 	}
 
-	public void showStage() {
+	public void showStage()
+	{
 		stgElementInfo.show();
 	}
 
-	public void loadBack() {
+	public void loadBack()
+	{
 		stgElementInfo.close();
 		stgBack.show();
 	}
 
-	public void loadMenu() {
+	public void loadMenu()
+	{
 		MainMenuController ctrlMenu = new MainMenuController();
 		ctrlMenu.showStage();
 		stgElementInfo.close();
